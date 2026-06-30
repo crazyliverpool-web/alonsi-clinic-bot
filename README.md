@@ -55,6 +55,7 @@ n8n Cloud (csmileyala.app.n8n.cloud)
 - **ชื่อ:** คลินิกทันตกรรมซี-สไมล์
 - **ที่อยู่:** 9/1 ถ.อาคารสงเคราะห์ ต.สะเตง อ.เมือง จ.ยะลา 95000
 - **โทร:** 0863655805
+- **Google Maps:** https://maps.app.goo.gl/jR6J5MPPcrRm5stt5
 - **เวลาทำการ:** จ-ศ 10:00-20:00 | ส-อ/หยุด 10:00-16:00 (โทรเช็คก่อนเสมอ)
 - **ทีมแพทย์:** หมอซี, หมอแพร, หมอต๋อย, หมอโฟร์, หมอช่อ (เวลาลงคลินิกไม่ตรงกัน — โทรเช็ค)
 - **บอทชื่อ:** คุกกี้
@@ -180,3 +181,5 @@ curl -X PUT -H "X-N8N-API-KEY: <key>" -H "Content-Type: application/json" \
 | 2026-06-30 | เปลี่ยนชื่อบอทเป็น "คุกกี้" |
 | 2026-06-30 | เพิ่ม LINE Signature Verification (HMAC-SHA256) |
 | 2026-06-30 | Auto-cleanup: Save State เขียน updated_at + cron ล้าง session ค้าง 24 ชม. |
+| 2026-06-30 | เพิ่ม Google Maps link ใน system prompt (แสดงแผนที่เมื่อถามที่อยู่) |
+| 2026-06-30 | เพิ่ม FAQ sheet + logging คำถามที่ไม่รู้จัก |

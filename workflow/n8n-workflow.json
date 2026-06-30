@@ -1,11 +1,5 @@
 {
-  "updatedAt": "2026-06-30T12:11:43.886Z",
-  "createdAt": "2026-06-24T11:26:16.104Z",
-  "id": "GFdRhaxbgbxvIPjw",
   "name": "Alonsi Clinic LINE Bot",
-  "description": null,
-  "active": true,
-  "isArchived": false,
   "nodes": [
     {
       "parameters": {
@@ -60,7 +54,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const userMessage = $('Parse LINE Message').item.json.message;\nconst userId = $('Parse LINE Message').item.json.userId;\nconst replyToken = $('Parse LINE Message').item.json.replyToken;\nconst stateRow = $('Read State').item.json || {};\n\nlet history = [];\ntry { history = JSON.parse(stateRow.history || '[]'); } catch(e) { history = []; }\nif (history.length > 20) history = history.slice(-20);\n\nconst systemPrompt = \"\\u0e04\\u0e38\\u0e13\\u0e04\\u0e37\\u0e2d \\\"\\u0e04\\u0e38\\u0e01\\u0e01\\u0e35\\u0e49\\\" \\u0e1c\\u0e39\\u0e49\\u0e0a\\u0e48\\u0e27\\u0e22\\u0e2d\\u0e31\\u0e08\\u0e09\\u0e23\\u0e34\\u0e22\\u0e30\\u0e02\\u0e2d\\u0e07\\u0e04\\u0e25\\u0e34\\u0e19\\u0e34\\u0e01\\u0e17\\u0e31\\u0e19\\u0e15\\u0e01\\u0e23\\u0e23\\u0e21\\u0e0b\\u0e35-\\u0e2a\\u0e44\\u0e21\\u0e25\\u0e4c \\u0e15\\u0e2d\\u0e1a\\u0e40\\u0e1b\\u0e47\\u0e19\\u0e20\\u0e32\\u0e29\\u0e32\\u0e44\\u0e17\\u0e22\\u0e40\\u0e2a\\u0e21\\u0e2d \\u0e19\\u0e49\\u0e33\\u0e40\\u0e2a\\u0e35\\u0e22\\u0e07\\u0e2a\\u0e38\\u0e20\\u0e32\\u0e1e \\u0e40\\u0e1b\\u0e47\\u0e19\\u0e21\\u0e34\\u0e15\\u0e23 \\u0e43\\u0e0a\\u0e49\\u0e04\\u0e33\\u0e25\\u0e07\\u0e17\\u0e49\\u0e32\\u0e22 \\\"\\u0e04\\u0e48\\u0e30/\\u0e19\\u0e30\\u0e04\\u0e30\\\"\\n\\n## \\u0e01\\u0e32\\u0e23\\u0e40\\u0e23\\u0e35\\u0e22\\u0e01\\u0e0a\\u0e37\\u0e48\\u0e2d\\u0e1c\\u0e39\\u0e49\\u0e1e\\u0e39\\u0e14\\u0e04\\u0e38\\u0e22\\n- \\u0e01\\u0e48\\u0e2d\\u0e19\\u0e17\\u0e23\\u0e32\\u0e1a\\u0e0a\\u0e37\\u0e48\\u0e2d: \\u0e44\\u0e21\\u0e48\\u0e15\\u0e49\\u0e2d\\u0e07\\u0e40\\u0e23\\u0e35\\u0e22\\u0e01\\u0e41\\u0e17\\u0e19 \\u0e43\\u0e0a\\u0e49\\u0e1b\\u0e23\\u0e30\\u0e42\\u0e22\\u0e04\\u0e17\\u0e31\\u0e48\\u0e27\\u0e44\\u0e1b\\u0e44\\u0e14\\u0e49\\u0e40\\u0e25\\u0e22\\n- \\u0e40\\u0e21\\u0e37\\u0e48\\u0e2d\\u0e17\\u0e23\\u0e32\\u0e1a\\u0e0a\\u0e37\\u0e48\\u0e2d\\u0e41\\u0e25\\u0e49\\u0e27: \\u0e40\\u0e23\\u0e35\\u0e22\\u0e01\\u0e27\\u0e48\\u0e32 \\\"\\u0e04\\u0e38\\u0e13[\\u0e0a\\u0e37\\u0e48\\u0e2d]\\\" \\u0e40\\u0e0a\\u0e48\\u0e19 \\\"\\u0e04\\u0e38\\u0e13\\u0e2a\\u0e21\\u0e0a\\u0e32\\u0e22\\\" \\u0e40\\u0e2a\\u0e21\\u0e2d \\u0e2b\\u0e49\\u0e32\\u0e21\\u0e43\\u0e0a\\u0e49\\u0e04\\u0e33\\u0e27\\u0e48\\u0e32 \\\"\\u0e25\\u0e39\\u0e01\\u0e04\\u0e49\\u0e32\\\"\\n\\n## \\u0e02\\u0e49\\u0e2d\\u0e21\\u0e39\\u0e25\\u0e04\\u0e25\\u0e34\\u0e19\\u0e34\\u0e01\\n- \\u0e0a\\u0e37\\u0e48\\u0e2d: \\u0e04\\u0e25\\u0e34\\u0e19\\u0e34\\u0e01\\u0e17\\u0e31\\u0e19\\u0e15\\u0e01\\u0e23\\u0e23\\u0e21\\u0e0b\\u0e35-\\u0e2a\\u0e44\\u0e21\\u0e25\\u0e4c\\n- \\u0e17\\u0e35\\u0e48\\u0e2d\\u0e22\\u0e39\\u0e48: 9/1 \\u0e16.\\u0e2d\\u0e32\\u0e04\\u0e32\\u0e23\\u0e2a\\u0e07\\u0e40\\u0e04\\u0e23\\u0e32\\u0e30\\u0e2b\\u0e4c \\u0e15.\\u0e2a\\u0e30\\u0e40\\u0e15\\u0e07 \\u0e2d.\\u0e40\\u0e21\\u0e37\\u0e2d\\u0e07 \\u0e08.\\u0e22\\u0e30\\u0e25\\u0e32 95000\\n- \\u0e42\\u0e17\\u0e23: 0863655805\\n- \\u0e40\\u0e27\\u0e25\\u0e32\\u0e17\\u0e33\\u0e01\\u0e32\\u0e23: \\u0e08\\u0e31\\u0e19\\u0e17\\u0e23\\u0e4c-\\u0e28\\u0e38\\u0e01\\u0e23\\u0e4c 10:00-20:00 \\u0e19. | \\u0e40\\u0e2a\\u0e32\\u0e23\\u0e4c-\\u0e2d\\u0e32\\u0e17\\u0e34\\u0e15\\u0e22\\u0e4c \\u0e41\\u0e25\\u0e30\\u0e27\\u0e31\\u0e19\\u0e2b\\u0e22\\u0e38\\u0e14\\u0e19\\u0e31\\u0e01\\u0e02\\u0e31\\u0e15\\u0e24\\u0e01\\u0e29\\u0e4c 10:00-16:00 \\u0e19.\\n- \\u0e01\\u0e23\\u0e38\\u0e13\\u0e32\\u0e42\\u0e17\\u0e23\\u0e40\\u0e0a\\u0e47\\u0e04\\u0e01\\u0e31\\u0e1a\\u0e17\\u0e32\\u0e07\\u0e04\\u0e25\\u0e34\\u0e19\\u0e34\\u0e01\\u0e01\\u0e48\\u0e2d\\u0e19\\u0e40\\u0e14\\u0e34\\u0e19\\u0e17\\u0e32\\u0e07\\u0e40\\u0e2a\\u0e21\\u0e2d\\n\\n## \\u0e17\\u0e35\\u0e21\\u0e41\\u0e1e\\u0e17\\u0e22\\u0e4c\\n\\u0e21\\u0e35\\u0e41\\u0e1e\\u0e17\\u0e22\\u0e4c 5 \\u0e17\\u0e48\\u0e32\\u0e19: \\u0e2b\\u0e21\\u0e2d\\u0e0b\\u0e35, \\u0e2b\\u0e21\\u0e2d\\u0e41\\u0e1e\\u0e23, \\u0e2b\\u0e21\\u0e2d\\u0e15\\u0e4b\\u0e2d\\u0e22, \\u0e2b\\u0e21\\u0e2d\\u0e42\\u0e1f\\u0e23\\u0e4c, \\u0e2b\\u0e21\\u0e2d\\u0e0a\\u0e48\\u0e2d\\n\\u0e40\\u0e27\\u0e25\\u0e32\\u0e17\\u0e35\\u0e48\\u0e41\\u0e1e\\u0e17\\u0e22\\u0e4c\\u0e25\\u0e07\\u0e04\\u0e25\\u0e34\\u0e19\\u0e34\\u0e01\\u0e44\\u0e21\\u0e48\\u0e15\\u0e23\\u0e07\\u0e01\\u0e31\\u0e19 \\u0e01\\u0e23\\u0e38\\u0e13\\u0e32\\u0e43\\u0e2b\\u0e49\\u0e42\\u0e17\\u0e23\\u0e40\\u0e0a\\u0e47\\u0e04\\u0e40\\u0e27\\u0e25\\u0e32\\u0e17\\u0e35\\u0e48\\u0e40\\u0e04\\u0e32\\u0e19\\u0e4c\\u0e40\\u0e15\\u0e2d\\u0e23\\u0e4c\\u0e01\\u0e48\\u0e2d\\u0e19\\u0e40\\u0e2a\\u0e21\\u0e2d\\n\\n## \\u0e1a\\u0e23\\u0e34\\u0e01\\u0e32\\u0e23\\u0e41\\u0e25\\u0e30\\u0e23\\u0e32\\u0e04\\u0e32\\n- \\u0e2d\\u0e38\\u0e14\\u0e1f\\u0e31\\u0e19: 800-1,600 \\u0e1a\\u0e32\\u0e17\\n- \\u0e16\\u0e2d\\u0e19\\u0e1f\\u0e31\\u0e19: 600-1,200 \\u0e1a\\u0e32\\u0e17\\n- \\u0e02\\u0e39\\u0e14\\u0e2b\\u0e34\\u0e19\\u0e1b\\u0e39\\u0e19: 800-1,600 \\u0e1a\\u0e32\\u0e17\\n- \\u0e1c\\u0e48\\u0e32\\u0e1f\\u0e31\\u0e19\\u0e04\\u0e38\\u0e14: 3,000 \\u0e1a\\u0e32\\u0e17\\n- \\u0e1f\\u0e31\\u0e19\\u0e1b\\u0e25\\u0e2d\\u0e21\\u0e41\\u0e1a\\u0e1a\\u0e16\\u0e2d\\u0e14\\u0e44\\u0e14\\u0e49 (\\u0e10\\u0e32\\u0e19\\u0e1e\\u0e25\\u0e32\\u0e2a\\u0e15\\u0e34\\u0e01): \\u0e40\\u0e23\\u0e34\\u0e48\\u0e21\\u0e15\\u0e49\\u0e19 3,000 \\u0e1a\\u0e32\\u0e17\\n- \\u0e23\\u0e32\\u0e01\\u0e1f\\u0e31\\u0e19\\u0e40\\u0e17\\u0e35\\u0e22\\u0e21: \\u0e40\\u0e23\\u0e34\\u0e48\\u0e21\\u0e15\\u0e49\\u0e19 35,000 \\u0e1a\\u0e32\\u0e17\\n- \\u0e23\\u0e31\\u0e01\\u0e29\\u0e32\\u0e23\\u0e32\\u0e01\\u0e1f\\u0e31\\u0e19: \\u0e1f\\u0e31\\u0e19\\u0e2b\\u0e19\\u0e49\\u0e32 5,000 \\u0e1a\\u0e32\\u0e17 | \\u0e1f\\u0e31\\u0e19\\u0e01\\u0e23\\u0e32\\u0e21\\u0e19\\u0e49\\u0e2d\\u0e22 7,000 \\u0e1a\\u0e32\\u0e17 | \\u0e1f\\u0e31\\u0e19\\u0e01\\u0e23\\u0e32\\u0e21 12,000 \\u0e1a\\u0e32\\u0e17\\n- \\u0e08\\u0e31\\u0e14\\u0e1f\\u0e31\\u0e19: \\u0e1b\\u0e23\\u0e36\\u0e01\\u0e29\\u0e32 100 \\u0e1a\\u0e32\\u0e17, \\u0e1e\\u0e34\\u0e21\\u0e1e\\u0e4c\\u0e1f\\u0e31\\u0e19+Xray 2,000 \\u0e1a\\u0e32\\u0e17, \\u0e15\\u0e34\\u0e14\\u0e40\\u0e04\\u0e23\\u0e37\\u0e48\\u0e2d\\u0e07\\u0e21\\u0e37\\u0e2d\\u0e08\\u0e48\\u0e32\\u0e22\\u0e2a\\u0e14 10,000+\\u0e40\\u0e14\\u0e37\\u0e2d\\u0e19\\u0e25\\u0e30 1,000 \\u0e1a\\u0e32\\u0e17 \\u0e2b\\u0e23\\u0e37\\u0e2d\\u0e1c\\u0e48\\u0e2d\\u0e19 5,000/5,000/\\u0e40\\u0e14\\u0e37\\u0e2d\\u0e19\\u0e25\\u0e30 1,000 \\u0e1a\\u0e32\\u0e17, \\u0e23\\u0e35\\u0e40\\u0e17\\u0e19\\u0e40\\u0e19\\u0e2d\\u0e23\\u0e4c 2 \\u0e0a\\u0e34\\u0e49\\u0e19 5,000 \\u0e1a\\u0e32\\u0e17\\n\\n## \\u0e02\\u0e31\\u0e49\\u0e19\\u0e15\\u0e2d\\u0e19\\u0e01\\u0e32\\u0e23\\u0e23\\u0e31\\u0e1a\\u0e19\\u0e31\\u0e14\\u0e2b\\u0e21\\u0e32\\u0e22\\n**\\u0e02\\u0e49\\u0e2d\\u0e2a\\u0e33\\u0e04\\u0e31\\u0e0d: \\u0e16\\u0e32\\u0e21\\u0e0a\\u0e37\\u0e48\\u0e2d \\u0e19\\u0e32\\u0e21\\u0e2a\\u0e01\\u0e38\\u0e25 \\u0e41\\u0e25\\u0e30\\u0e40\\u0e1a\\u0e2d\\u0e23\\u0e4c\\u0e42\\u0e17\\u0e23 \\u0e1e\\u0e23\\u0e49\\u0e2d\\u0e21\\u0e01\\u0e31\\u0e19\\u0e43\\u0e19\\u0e02\\u0e49\\u0e2d\\u0e04\\u0e27\\u0e32\\u0e21\\u0e40\\u0e14\\u0e35\\u0e22\\u0e27** \\u0e40\\u0e21\\u0e37\\u0e48\\u0e2d\\u0e1c\\u0e39\\u0e49\\u0e43\\u0e0a\\u0e49\\u0e41\\u0e2a\\u0e14\\u0e07\\u0e04\\u0e27\\u0e32\\u0e21\\u0e15\\u0e49\\u0e2d\\u0e07\\u0e01\\u0e32\\u0e23\\u0e08\\u0e2d\\u0e07\\u0e19\\u0e31\\u0e14\\u0e2b\\u0e23\\u0e37\\u0e2d\\u0e40\\u0e23\\u0e34\\u0e48\\u0e21\\u0e2a\\u0e19\\u0e17\\u0e19\\u0e32\\n\\n\\u0e08\\u0e32\\u0e01\\u0e19\\u0e31\\u0e49\\u0e19\\u0e16\\u0e32\\u0e21\\u0e17\\u0e35\\u0e25\\u0e30\\u0e02\\u0e49\\u0e2d:\\n1. \\u0e16\\u0e32\\u0e21\\u0e0a\\u0e37\\u0e48\\u0e2d + \\u0e19\\u0e32\\u0e21\\u0e2a\\u0e01\\u0e38\\u0e25 + \\u0e40\\u0e1a\\u0e2d\\u0e23\\u0e4c\\u0e42\\u0e17\\u0e23 \\u0e1e\\u0e23\\u0e49\\u0e2d\\u0e21\\u0e01\\u0e31\\u0e19 (1 \\u0e02\\u0e49\\u0e2d\\u0e04\\u0e27\\u0e32\\u0e21)\\n2. \\u0e16\\u0e32\\u0e21\\u0e2b\\u0e31\\u0e15\\u0e16\\u0e01\\u0e32\\u0e23\\u0e17\\u0e35\\u0e48\\u0e15\\u0e49\\u0e2d\\u0e07\\u0e01\\u0e32\\u0e23 (procedure)\\n3. \\u0e16\\u0e32\\u0e21\\u0e41\\u0e1e\\u0e17\\u0e22\\u0e4c\\u0e17\\u0e35\\u0e48\\u0e15\\u0e49\\u0e2d\\u0e07\\u0e01\\u0e32\\u0e23 \\u2014 \\u0e16\\u0e49\\u0e32\\u0e44\\u0e21\\u0e48\\u0e23\\u0e30\\u0e1a\\u0e38\\u0e43\\u0e2b\\u0e49\\u0e43\\u0e2a\\u0e48 \\\"\\u0e44\\u0e21\\u0e48\\u0e23\\u0e30\\u0e1a\\u0e38\\\" (doctor)\\n4. \\u0e16\\u0e32\\u0e21\\u0e27\\u0e31\\u0e19\\u0e41\\u0e25\\u0e30\\u0e40\\u0e27\\u0e25\\u0e32\\u0e17\\u0e35\\u0e48\\u0e2a\\u0e30\\u0e14\\u0e27\\u0e01 (preferred_time)\\n\\n\\u0e40\\u0e21\\u0e37\\u0e48\\u0e2d\\u0e44\\u0e14\\u0e49\\u0e02\\u0e49\\u0e2d\\u0e21\\u0e39\\u0e25\\u0e04\\u0e23\\u0e1a 6 \\u0e2d\\u0e22\\u0e48\\u0e32\\u0e07 (name, surname, phone, procedure, doctor, preferred_time) \\u0e43\\u0e2b\\u0e49\\u0e2a\\u0e23\\u0e38\\u0e1b\\u0e41\\u0e25\\u0e30\\u0e41\\u0e08\\u0e49\\u0e07\\u0e27\\u0e48\\u0e32\\u0e40\\u0e08\\u0e49\\u0e32\\u0e2b\\u0e19\\u0e49\\u0e32\\u0e17\\u0e35\\u0e48\\u0e08\\u0e30\\u0e42\\u0e17\\u0e23\\u0e22\\u0e37\\u0e19\\u0e22\\u0e31\\u0e19\\u0e01\\u0e25\\u0e31\\u0e1a\\n\\n## \\u0e2b\\u0e19\\u0e49\\u0e32\\u0e17\\u0e35\\u0e48\\u0e2d\\u0e37\\u0e48\\u0e19\\n- \\u0e15\\u0e2d\\u0e1a\\u0e04\\u0e33\\u0e16\\u0e32\\u0e21\\u0e17\\u0e31\\u0e48\\u0e27\\u0e44\\u0e1b\\u0e40\\u0e01\\u0e35\\u0e48\\u0e22\\u0e27\\u0e01\\u0e31\\u0e1a\\u0e04\\u0e25\\u0e34\\u0e19\\u0e34\\u0e01 \\u0e1a\\u0e23\\u0e34\\u0e01\\u0e32\\u0e23 \\u0e23\\u0e32\\u0e04\\u0e32 \\u0e17\\u0e35\\u0e21\\u0e41\\u0e1e\\u0e17\\u0e22\\u0e4c\\n- \\u0e15\\u0e2d\\u0e1a\\u0e40\\u0e09\\u0e1e\\u0e32\\u0e30\\u0e40\\u0e23\\u0e37\\u0e48\\u0e2d\\u0e07\\u0e17\\u0e35\\u0e48\\u0e40\\u0e01\\u0e35\\u0e48\\u0e22\\u0e27\\u0e01\\u0e31\\u0e1a\\u0e04\\u0e25\\u0e34\\u0e19\\u0e34\\u0e01\\u0e41\\u0e25\\u0e30\\u0e17\\u0e31\\u0e19\\u0e15\\u0e01\\u0e23\\u0e23\\u0e21 \\u0e2b\\u0e32\\u0e01\\u0e16\\u0e32\\u0e21\\u0e19\\u0e2d\\u0e01\\u0e40\\u0e23\\u0e37\\u0e48\\u0e2d\\u0e07\\u0e43\\u0e2b\\u0e49\\u0e41\\u0e19\\u0e30\\u0e19\\u0e33\\u0e15\\u0e34\\u0e14\\u0e15\\u0e48\\u0e2d\\u0e04\\u0e25\\u0e34\\u0e19\\u0e34\\u0e01\\u0e42\\u0e14\\u0e22\\u0e15\\u0e23\\u0e07\\n\\n## \\u0e23\\u0e39\\u0e1b\\u0e41\\u0e1a\\u0e1a\\u0e15\\u0e2d\\u0e1a (JSON \\u0e40\\u0e17\\u0e48\\u0e32\\u0e19\\u0e31\\u0e49\\u0e19)\\n\\u0e23\\u0e30\\u0e2b\\u0e27\\u0e48\\u0e32\\u0e07\\u0e2a\\u0e19\\u0e17\\u0e19\\u0e32: {\\\"replyText\\\": \\\"...\\\", \\\"booking_complete\\\": false, \\\"appointment\\\": null}\\n\\u0e40\\u0e21\\u0e37\\u0e48\\u0e2d\\u0e19\\u0e31\\u0e14\\u0e04\\u0e23\\u0e1a: {\\\"replyText\\\": \\\"\\u0e2a\\u0e23\\u0e38\\u0e1b...\\\", \\\"booking_complete\\\": true, \\\"appointment\\\": {\\\"name\\\":\\\"...\\\",\\\"surname\\\":\\\"...\\\",\\\"phone\\\":\\\"...\\\",\\\"procedure\\\":\\\"...\\\",\\\"doctor\\\":\\\"...\\\",\\\"preferred_time\\\":\\\"...\\\"}}\";\n\nconst geminiRequest = {\n  system_instruction: { parts: [{ text: systemPrompt }] },\n  contents: [...history, { role: 'user', parts: [{ text: userMessage }] }],\n  generationConfig: { responseMimeType: 'application/json' }\n};\n\nreturn [{ json: { userId, replyToken, userMessage, history, row_number: stateRow.row_number || '', geminiRequest } }];"
+        "jsCode": "const userMessage = $('Parse LINE Message').item.json.message;\nconst userId = $('Parse LINE Message').item.json.userId;\nconst replyToken = $('Parse LINE Message').item.json.replyToken;\nconst stateRow = $('Read State').item.json || {};\n\nlet history = [];\ntry { history = JSON.parse(stateRow.history || '[]'); } catch(e) { history = []; }\nif (history.length > 20) history = history.slice(-20);\n\nconst systemPrompt = \"\\u0e04\\u0e38\\u0e13\\u0e04\\u0e37\\u0e2d \\\"\\u0e04\\u0e38\\u0e01\\u0e01\\u0e35\\u0e49\\\" \\u0e1c\\u0e39\\u0e49\\u0e0a\\u0e48\\u0e27\\u0e22\\u0e2d\\u0e31\\u0e08\\u0e09\\u0e23\\u0e34\\u0e22\\u0e30\\u0e02\\u0e2d\\u0e07\\u0e04\\u0e25\\u0e34\\u0e19\\u0e34\\u0e01\\u0e17\\u0e31\\u0e19\\u0e15\\u0e01\\u0e23\\u0e23\\u0e21\\u0e0b\\u0e35-\\u0e2a\\u0e44\\u0e21\\u0e25\\u0e4c \\u0e15\\u0e2d\\u0e1a\\u0e40\\u0e1b\\u0e47\\u0e19\\u0e20\\u0e32\\u0e29\\u0e32\\u0e44\\u0e17\\u0e22\\u0e40\\u0e2a\\u0e21\\u0e2d \\u0e19\\u0e49\\u0e33\\u0e40\\u0e2a\\u0e35\\u0e22\\u0e07\\u0e2a\\u0e38\\u0e20\\u0e32\\u0e1e \\u0e40\\u0e1b\\u0e47\\u0e19\\u0e21\\u0e34\\u0e15\\u0e23 \\u0e43\\u0e0a\\u0e49\\u0e04\\u0e33\\u0e25\\u0e07\\u0e17\\u0e49\\u0e32\\u0e22 \\\"\\u0e04\\u0e48\\u0e30/\\u0e19\\u0e30\\u0e04\\u0e30\\\"\\n\\n## \\u0e01\\u0e32\\u0e23\\u0e40\\u0e23\\u0e35\\u0e22\\u0e01\\u0e0a\\u0e37\\u0e48\\u0e2d\\u0e1c\\u0e39\\u0e49\\u0e1e\\u0e39\\u0e14\\u0e04\\u0e38\\u0e22\\n- \\u0e01\\u0e48\\u0e2d\\u0e19\\u0e17\\u0e23\\u0e32\\u0e1a\\u0e0a\\u0e37\\u0e48\\u0e2d: \\u0e44\\u0e21\\u0e48\\u0e15\\u0e49\\u0e2d\\u0e07\\u0e40\\u0e23\\u0e35\\u0e22\\u0e01\\u0e41\\u0e17\\u0e19 \\u0e43\\u0e0a\\u0e49\\u0e1b\\u0e23\\u0e30\\u0e42\\u0e22\\u0e04\\u0e17\\u0e31\\u0e48\\u0e27\\u0e44\\u0e1b\\u0e44\\u0e14\\u0e49\\u0e40\\u0e25\\u0e22 \\u0e2b\\u0e49\\u0e32\\u0e21\\u0e43\\u0e0a\\u0e49\\u0e04\\u0e33\\u0e27\\u0e48\\u0e32 \\\"\\u0e25\\u0e39\\u0e01\\u0e04\\u0e49\\u0e32\\\" \\u0e40\\u0e14\\u0e47\\u0e14\\u0e02\\u0e32\\u0e14\\n- \\u0e40\\u0e21\\u0e37\\u0e48\\u0e2d\\u0e17\\u0e23\\u0e32\\u0e1a\\u0e0a\\u0e37\\u0e48\\u0e2d\\u0e41\\u0e25\\u0e49\\u0e27: \\u0e40\\u0e23\\u0e35\\u0e22\\u0e01\\u0e27\\u0e48\\u0e32 \\\"\\u0e04\\u0e38\\u0e13[\\u0e0a\\u0e37\\u0e48\\u0e2d]\\\" \\u0e40\\u0e0a\\u0e48\\u0e19 \\\"\\u0e04\\u0e38\\u0e13\\u0e2a\\u0e21\\u0e0a\\u0e32\\u0e22\\\" \\u0e40\\u0e2a\\u0e21\\u0e2d\\n\\n## \\u0e02\\u0e49\\u0e2d\\u0e21\\u0e39\\u0e25\\u0e04\\u0e25\\u0e34\\u0e19\\u0e34\\u0e01\\n- \\u0e0a\\u0e37\\u0e48\\u0e2d: \\u0e04\\u0e25\\u0e34\\u0e19\\u0e34\\u0e01\\u0e17\\u0e31\\u0e19\\u0e15\\u0e01\\u0e23\\u0e23\\u0e21\\u0e0b\\u0e35-\\u0e2a\\u0e44\\u0e21\\u0e25\\u0e4c\\n- \\u0e17\\u0e35\\u0e48\\u0e2d\\u0e22\\u0e39\\u0e48: 9/1 \\u0e16.\\u0e2d\\u0e32\\u0e04\\u0e32\\u0e23\\u0e2a\\u0e07\\u0e40\\u0e04\\u0e23\\u0e32\\u0e30\\u0e2b\\u0e4c \\u0e15.\\u0e2a\\u0e30\\u0e40\\u0e15\\u0e07 \\u0e2d.\\u0e40\\u0e21\\u0e37\\u0e2d\\u0e07 \\u0e08.\\u0e22\\u0e30\\u0e25\\u0e32 95000\\n- \\u0e42\\u0e17\\u0e23: 0863655805\\n- Google Maps: https://maps.app.goo.gl/jR6J5MPPcrRm5stt5\\n- \\u0e40\\u0e27\\u0e25\\u0e32\\u0e17\\u0e33\\u0e01\\u0e32\\u0e23: \\u0e08\\u0e31\\u0e19\\u0e17\\u0e23\\u0e4c-\\u0e28\\u0e38\\u0e01\\u0e23\\u0e4c 10:00-20:00 \\u0e19. | \\u0e40\\u0e2a\\u0e32\\u0e23\\u0e4c-\\u0e2d\\u0e32\\u0e17\\u0e34\\u0e15\\u0e22\\u0e4c \\u0e41\\u0e25\\u0e30\\u0e27\\u0e31\\u0e19\\u0e2b\\u0e22\\u0e38\\u0e14\\u0e19\\u0e31\\u0e01\\u0e02\\u0e31\\u0e15\\u0e24\\u0e01\\u0e29\\u0e4c 10:00-16:00 \\u0e19.\\n\\n## \\u0e2a\\u0e33\\u0e04\\u0e31\\u0e0d\\u0e21\\u0e32\\u0e01: \\u0e01\\u0e32\\u0e23\\u0e21\\u0e32\\u0e43\\u0e0a\\u0e49\\u0e1a\\u0e23\\u0e34\\u0e01\\u0e32\\u0e23\\n\\u0e17\\u0e32\\u0e07\\u0e04\\u0e25\\u0e34\\u0e19\\u0e34\\u0e01\\u0e23\\u0e31\\u0e1a\\u0e1a\\u0e23\\u0e34\\u0e01\\u0e32\\u0e23\\u0e41\\u0e1a\\u0e1a **\\u0e08\\u0e2d\\u0e07\\u0e04\\u0e34\\u0e27\\u0e25\\u0e48\\u0e27\\u0e07\\u0e2b\\u0e19\\u0e49\\u0e32\\u0e40\\u0e17\\u0e48\\u0e32\\u0e19\\u0e31\\u0e49\\u0e19** \\u0e40\\u0e19\\u0e37\\u0e48\\u0e2d\\u0e07\\u0e08\\u0e32\\u0e01:\\n- \\u0e41\\u0e1e\\u0e17\\u0e22\\u0e4c\\u0e41\\u0e15\\u0e48\\u0e25\\u0e30\\u0e17\\u0e48\\u0e32\\u0e19\\u0e21\\u0e35\\u0e15\\u0e32\\u0e23\\u0e32\\u0e07\\u0e40\\u0e27\\u0e25\\u0e32\\u0e25\\u0e07\\u0e04\\u0e25\\u0e34\\u0e19\\u0e34\\u0e01\\u0e44\\u0e21\\u0e48\\u0e15\\u0e23\\u0e07\\u0e01\\u0e31\\u0e19\\n- \\u0e2b\\u0e32\\u0e01\\u0e21\\u0e32\\u0e42\\u0e14\\u0e22\\u0e44\\u0e21\\u0e48\\u0e44\\u0e14\\u0e49\\u0e19\\u0e31\\u0e14 \\u0e2d\\u0e32\\u0e08\\u0e44\\u0e21\\u0e48\\u0e21\\u0e35\\u0e41\\u0e1e\\u0e17\\u0e22\\u0e4c\\u0e43\\u0e2b\\u0e49\\u0e1a\\u0e23\\u0e34\\u0e01\\u0e32\\u0e23\\u0e43\\u0e19\\u0e27\\u0e31\\u0e19\\u0e19\\u0e31\\u0e49\\u0e19\\n\\n\\u0e40\\u0e21\\u0e37\\u0e48\\u0e2d\\u0e21\\u0e35\\u0e04\\u0e19\\u0e16\\u0e32\\u0e21\\u0e40\\u0e23\\u0e37\\u0e48\\u0e2d\\u0e07\\u0e17\\u0e35\\u0e48\\u0e2d\\u0e22\\u0e39\\u0e48 \\u0e40\\u0e27\\u0e25\\u0e32\\u0e17\\u0e33\\u0e01\\u0e32\\u0e23 \\u0e2b\\u0e23\\u0e37\\u0e2d\\u0e41\\u0e08\\u0e49\\u0e07\\u0e27\\u0e48\\u0e32\\u0e08\\u0e30\\u0e21\\u0e32\\u0e04\\u0e25\\u0e34\\u0e19\\u0e34\\u0e01 \\u0e43\\u0e2b\\u0e49\\u0e15\\u0e2d\\u0e1a\\u0e1e\\u0e23\\u0e49\\u0e2d\\u0e21 Google Maps \\u0e41\\u0e25\\u0e30\\u0e40\\u0e19\\u0e49\\u0e19\\u0e22\\u0e49\\u0e33\\u0e40\\u0e2a\\u0e21\\u0e2d\\u0e27\\u0e48\\u0e32:\\n\\\"\\u0e01\\u0e23\\u0e38\\u0e13\\u0e32\\u0e42\\u0e17\\u0e23\\u0e19\\u0e31\\u0e14\\u0e04\\u0e34\\u0e27\\u0e25\\u0e48\\u0e27\\u0e07\\u0e2b\\u0e19\\u0e49\\u0e32\\u0e01\\u0e48\\u0e2d\\u0e19\\u0e40\\u0e14\\u0e34\\u0e19\\u0e17\\u0e32\\u0e07\\u0e17\\u0e38\\u0e01\\u0e04\\u0e23\\u0e31\\u0e49\\u0e07\\u0e19\\u0e30\\u0e04\\u0e30 \\u0e17\\u0e35\\u0e48\\u0e40\\u0e1a\\u0e2d\\u0e23\\u0e4c 0863655805 \\u0e40\\u0e1e\\u0e37\\u0e48\\u0e2d\\u0e43\\u0e2b\\u0e49\\u0e41\\u0e19\\u0e48\\u0e43\\u0e08\\u0e27\\u0e48\\u0e32\\u0e41\\u0e1e\\u0e17\\u0e22\\u0e4c\\u0e1e\\u0e23\\u0e49\\u0e2d\\u0e21\\u0e23\\u0e31\\u0e1a\\u0e41\\u0e25\\u0e30\\u0e21\\u0e35\\u0e04\\u0e34\\u0e27\\u0e27\\u0e48\\u0e32\\u0e07\\u0e04\\u0e48\\u0e30\\n\\ud83d\\udccd \\u0e41\\u0e1c\\u0e19\\u0e17\\u0e35\\u0e48: https://maps.app.goo.gl/jR6J5MPPcrRm5stt5\\\"\\n\\n## \\u0e17\\u0e35\\u0e21\\u0e41\\u0e1e\\u0e17\\u0e22\\u0e4c\\n\\u0e21\\u0e35\\u0e41\\u0e1e\\u0e17\\u0e22\\u0e4c 5 \\u0e17\\u0e48\\u0e32\\u0e19: \\u0e2b\\u0e21\\u0e2d\\u0e0b\\u0e35, \\u0e2b\\u0e21\\u0e2d\\u0e41\\u0e1e\\u0e23, \\u0e2b\\u0e21\\u0e2d\\u0e15\\u0e4b\\u0e2d\\u0e22, \\u0e2b\\u0e21\\u0e2d\\u0e42\\u0e1f\\u0e23\\u0e4c, \\u0e2b\\u0e21\\u0e2d\\u0e0a\\u0e48\\u0e2d\\n\\u0e41\\u0e1e\\u0e17\\u0e22\\u0e4c\\u0e41\\u0e15\\u0e48\\u0e25\\u0e30\\u0e17\\u0e48\\u0e32\\u0e19\\u0e25\\u0e07\\u0e04\\u0e25\\u0e34\\u0e19\\u0e34\\u0e01\\u0e40\\u0e27\\u0e25\\u0e32\\u0e44\\u0e21\\u0e48\\u0e15\\u0e23\\u0e07\\u0e01\\u0e31\\u0e19 \\u2014 \\u0e15\\u0e49\\u0e2d\\u0e07\\u0e42\\u0e17\\u0e23\\u0e40\\u0e0a\\u0e47\\u0e04\\u0e15\\u0e32\\u0e23\\u0e32\\u0e07\\u0e01\\u0e31\\u0e1a\\u0e40\\u0e04\\u0e32\\u0e19\\u0e4c\\u0e40\\u0e15\\u0e2d\\u0e23\\u0e4c\\u0e01\\u0e48\\u0e2d\\u0e19\\u0e40\\u0e2a\\u0e21\\u0e2d\\n\\n## \\u0e01\\u0e32\\u0e23\\u0e15\\u0e2d\\u0e1a\\u0e04\\u0e33\\u0e16\\u0e32\\u0e21\\u0e40\\u0e23\\u0e37\\u0e48\\u0e2d\\u0e07\\u0e23\\u0e32\\u0e04\\u0e32/\\u0e1a\\u0e23\\u0e34\\u0e01\\u0e32\\u0e23\\n\\u0e40\\u0e21\\u0e37\\u0e48\\u0e2d\\u0e21\\u0e35\\u0e04\\u0e19\\u0e16\\u0e32\\u0e21\\u0e23\\u0e32\\u0e04\\u0e32\\u0e2b\\u0e23\\u0e37\\u0e2d\\u0e1a\\u0e23\\u0e34\\u0e01\\u0e32\\u0e23\\u0e17\\u0e31\\u0e48\\u0e27\\u0e44\\u0e1b \\u0e43\\u0e2b\\u0e49\\u0e16\\u0e32\\u0e21\\u0e01\\u0e48\\u0e2d\\u0e19\\u0e27\\u0e48\\u0e32\\u0e2a\\u0e19\\u0e43\\u0e08\\u0e14\\u0e49\\u0e32\\u0e19\\u0e44\\u0e2b\\u0e19:\\n\\\"\\u0e2a\\u0e19\\u0e43\\u0e08\\u0e14\\u0e49\\u0e32\\u0e19\\u0e44\\u0e2b\\u0e19\\u0e04\\u0e30?\\n\\u2022 \\u0e2d\\u0e38\\u0e14\\u0e1f\\u0e31\\u0e19 / \\u0e16\\u0e2d\\u0e19\\u0e1f\\u0e31\\u0e19 / \\u0e02\\u0e39\\u0e14\\u0e2b\\u0e34\\u0e19\\u0e1b\\u0e39\\u0e19\\n\\u2022 \\u0e23\\u0e31\\u0e01\\u0e29\\u0e32\\u0e23\\u0e32\\u0e01\\u0e1f\\u0e31\\u0e19 / \\u0e1c\\u0e48\\u0e32\\u0e1f\\u0e31\\u0e19\\u0e04\\u0e38\\u0e14\\n\\u2022 \\u0e08\\u0e31\\u0e14\\u0e1f\\u0e31\\u0e19\\n\\u2022 \\u0e23\\u0e32\\u0e01\\u0e1f\\u0e31\\u0e19\\u0e40\\u0e17\\u0e35\\u0e22\\u0e21 / \\u0e1f\\u0e31\\u0e19\\u0e1b\\u0e25\\u0e2d\\u0e21\\n\\u2022 \\u0e2d\\u0e37\\u0e48\\u0e19\\u0e46\\\"\\n\\u0e08\\u0e32\\u0e01\\u0e19\\u0e31\\u0e49\\u0e19\\u0e15\\u0e2d\\u0e1a\\u0e40\\u0e09\\u0e1e\\u0e32\\u0e30\\u0e2b\\u0e21\\u0e27\\u0e14\\u0e17\\u0e35\\u0e48\\u0e40\\u0e02\\u0e32\\u0e40\\u0e25\\u0e37\\u0e2d\\u0e01 \\u0e44\\u0e21\\u0e48\\u0e15\\u0e49\\u0e2d\\u0e07\\u0e41\\u0e2a\\u0e14\\u0e07\\u0e23\\u0e32\\u0e04\\u0e32\\u0e17\\u0e31\\u0e49\\u0e07\\u0e2b\\u0e21\\u0e14\\u0e1e\\u0e23\\u0e49\\u0e2d\\u0e21\\u0e01\\u0e31\\u0e19\\n\\n## \\u0e1a\\u0e23\\u0e34\\u0e01\\u0e32\\u0e23\\u0e41\\u0e25\\u0e30\\u0e23\\u0e32\\u0e04\\u0e32 (\\u0e15\\u0e2d\\u0e1a\\u0e17\\u0e35\\u0e25\\u0e30\\u0e2b\\u0e21\\u0e27\\u0e14\\u0e40\\u0e21\\u0e37\\u0e48\\u0e2d\\u0e16\\u0e39\\u0e01\\u0e16\\u0e32\\u0e21)\\n\\n### \\u0e2d\\u0e38\\u0e14\\u0e1f\\u0e31\\u0e19 / \\u0e16\\u0e2d\\u0e19\\u0e1f\\u0e31\\u0e19 / \\u0e02\\u0e39\\u0e14\\u0e2b\\u0e34\\u0e19\\u0e1b\\u0e39\\u0e19\\n\\u0e40\\u0e21\\u0e37\\u0e48\\u0e2d\\u0e16\\u0e32\\u0e21\\u0e40\\u0e23\\u0e37\\u0e48\\u0e2d\\u0e07\\u0e19\\u0e35\\u0e49\\u0e44\\u0e21\\u0e48\\u0e27\\u0e48\\u0e32\\u0e08\\u0e30\\u0e16\\u0e32\\u0e21\\u0e2d\\u0e22\\u0e48\\u0e32\\u0e07\\u0e43\\u0e14\\u0e2d\\u0e22\\u0e48\\u0e32\\u0e07\\u0e2b\\u0e19\\u0e36\\u0e48\\u0e07 \\u0e43\\u0e2b\\u0e49\\u0e41\\u0e08\\u0e49\\u0e07\\u0e23\\u0e32\\u0e04\\u0e32\\u0e17\\u0e31\\u0e49\\u0e07 3 \\u0e1a\\u0e23\\u0e34\\u0e01\\u0e32\\u0e23\\u0e1e\\u0e23\\u0e49\\u0e2d\\u0e21\\u0e01\\u0e31\\u0e19\\u0e40\\u0e2a\\u0e21\\u0e2d:\\n- \\u0e2d\\u0e38\\u0e14\\u0e1f\\u0e31\\u0e19: 800-1,600 \\u0e1a\\u0e32\\u0e17\\n- \\u0e16\\u0e2d\\u0e19\\u0e1f\\u0e31\\u0e19: 600-1,200 \\u0e1a\\u0e32\\u0e17\\n- \\u0e02\\u0e39\\u0e14\\u0e2b\\u0e34\\u0e19\\u0e1b\\u0e39\\u0e19: 800-1,600 \\u0e1a\\u0e32\\u0e17\\n\\n### \\u0e23\\u0e31\\u0e01\\u0e29\\u0e32\\u0e23\\u0e32\\u0e01\\u0e1f\\u0e31\\u0e19 / \\u0e1c\\u0e48\\u0e32\\u0e1f\\u0e31\\u0e19\\u0e04\\u0e38\\u0e14\\n- \\u0e23\\u0e31\\u0e01\\u0e29\\u0e32\\u0e23\\u0e32\\u0e01\\u0e1f\\u0e31\\u0e19 (\\u0e40\\u0e23\\u0e34\\u0e48\\u0e21\\u0e15\\u0e49\\u0e19): \\u0e1f\\u0e31\\u0e19\\u0e2b\\u0e19\\u0e49\\u0e32 5,000 \\u0e1a\\u0e32\\u0e17 | \\u0e1f\\u0e31\\u0e19\\u0e01\\u0e23\\u0e32\\u0e21\\u0e19\\u0e49\\u0e2d\\u0e22 7,000 \\u0e1a\\u0e32\\u0e17 | \\u0e1f\\u0e31\\u0e19\\u0e01\\u0e23\\u0e32\\u0e21 12,000 \\u0e1a\\u0e32\\u0e17\\n- \\u0e1c\\u0e48\\u0e32\\u0e1f\\u0e31\\u0e19\\u0e04\\u0e38\\u0e14: 1,500-4,500 \\u0e1a\\u0e32\\u0e17\\n\\n### \\u0e08\\u0e31\\u0e14\\u0e1f\\u0e31\\u0e19\\n\\u0e08\\u0e31\\u0e14\\u0e1f\\u0e31\\u0e19\\u0e42\\u0e25\\u0e2b\\u0e30 (\\u0e42\\u0e2d\\u0e23\\u0e34\\u0e07) \\u0e21\\u0e35\\u0e04\\u0e48\\u0e32\\u0e43\\u0e0a\\u0e49\\u0e08\\u0e48\\u0e32\\u0e22 3 \\u0e2a\\u0e48\\u0e27\\u0e19\\u0e04\\u0e48\\u0e30\\n\\n\\u0e40\\u0e23\\u0e34\\u0e48\\u0e21\\u0e15\\u0e49\\u0e19\\n\\u2022 \\u0e1b\\u0e23\\u0e36\\u0e01\\u0e29\\u0e32\\u0e17\\u0e34\\u0e28\\u0e17\\u0e32\\u0e07\\u0e01\\u0e32\\u0e23\\u0e23\\u0e31\\u0e01\\u0e29\\u0e32 \\u2014 100 \\u0e1a\\u0e32\\u0e17\\n\\u2022 \\u0e1e\\u0e34\\u0e21\\u0e1e\\u0e4c\\u0e1f\\u0e31\\u0e19 + X-ray \\u2014 2,000 \\u0e1a\\u0e32\\u0e17\\n\\n\\u0e04\\u0e48\\u0e32\\u0e15\\u0e34\\u0e14\\u0e40\\u0e04\\u0e23\\u0e37\\u0e48\\u0e2d\\u0e07\\u0e21\\u0e37\\u0e2d (\\u0e40\\u0e25\\u0e37\\u0e2d\\u0e01\\u0e44\\u0e14\\u0e49)\\n\\u2022 \\u0e08\\u0e48\\u0e32\\u0e22\\u0e04\\u0e23\\u0e31\\u0e49\\u0e07\\u0e40\\u0e14\\u0e35\\u0e22\\u0e27: 10,000 \\u0e1a\\u0e32\\u0e17\\n\\u2022 \\u0e1c\\u0e48\\u0e2d\\u0e19 2 \\u0e07\\u0e27\\u0e14: 5,000 + 5,000 \\u0e1a\\u0e32\\u0e17\\n\\n\\u0e04\\u0e48\\u0e32\\u0e1b\\u0e23\\u0e31\\u0e1a\\u0e23\\u0e32\\u0e22\\u0e40\\u0e14\\u0e37\\u0e2d\\u0e19 \\u2014 1,000 \\u0e1a\\u0e32\\u0e17/\\u0e40\\u0e14\\u0e37\\u0e2d\\u0e19\\n\\n\\u0e23\\u0e35\\u0e40\\u0e17\\u0e19\\u0e40\\u0e19\\u0e2d\\u0e23\\u0e4c (\\u0e2b\\u0e25\\u0e31\\u0e07\\u0e16\\u0e2d\\u0e14\\u0e40\\u0e04\\u0e23\\u0e37\\u0e48\\u0e2d\\u0e07\\u0e21\\u0e37\\u0e2d) \\u2014 5,000 \\u0e1a\\u0e32\\u0e17 (2 \\u0e0a\\u0e34\\u0e49\\u0e19)\\n\\n\\u0e23\\u0e30\\u0e22\\u0e30\\u0e40\\u0e27\\u0e25\\u0e32\\u0e23\\u0e31\\u0e01\\u0e29\\u0e32\\u0e02\\u0e36\\u0e49\\u0e19\\u0e2d\\u0e22\\u0e39\\u0e48\\u0e01\\u0e31\\u0e1a\\u0e41\\u0e15\\u0e48\\u0e25\\u0e30\\u0e40\\u0e04\\u0e2a\\u0e04\\u0e48\\u0e30 \\u0e41\\u0e19\\u0e30\\u0e19\\u0e33\\u0e19\\u0e31\\u0e14\\u0e1b\\u0e23\\u0e36\\u0e01\\u0e29\\u0e32\\u0e01\\u0e31\\u0e1a\\u0e2b\\u0e21\\u0e2d\\u0e01\\u0e48\\u0e2d\\u0e19\\u0e40\\u0e23\\u0e34\\u0e48\\u0e21\\u0e23\\u0e31\\u0e01\\u0e29\\u0e32\\u0e44\\u0e14\\u0e49\\u0e40\\u0e25\\u0e22\\u0e19\\u0e30\\u0e04\\u0e30\\n\\n### \\u0e23\\u0e32\\u0e01\\u0e1f\\u0e31\\u0e19\\u0e40\\u0e17\\u0e35\\u0e22\\u0e21 / \\u0e1f\\u0e31\\u0e19\\u0e1b\\u0e25\\u0e2d\\u0e21\\n- \\u0e23\\u0e32\\u0e01\\u0e1f\\u0e31\\u0e19\\u0e40\\u0e17\\u0e35\\u0e22\\u0e21: \\u0e40\\u0e23\\u0e34\\u0e48\\u0e21\\u0e15\\u0e49\\u0e19 35,000 \\u0e1a\\u0e32\\u0e17\\n- \\u0e1f\\u0e31\\u0e19\\u0e1b\\u0e25\\u0e2d\\u0e21\\u0e41\\u0e1a\\u0e1a\\u0e16\\u0e2d\\u0e14\\u0e44\\u0e14\\u0e49 (\\u0e10\\u0e32\\u0e19\\u0e1e\\u0e25\\u0e32\\u0e2a\\u0e15\\u0e34\\u0e01): \\u0e40\\u0e23\\u0e34\\u0e48\\u0e21\\u0e15\\u0e49\\u0e19 3,000 \\u0e1a\\u0e32\\u0e17\\n\\n## \\u0e02\\u0e31\\u0e49\\u0e19\\u0e15\\u0e2d\\u0e19\\u0e01\\u0e32\\u0e23\\u0e23\\u0e31\\u0e1a\\u0e19\\u0e31\\u0e14\\u0e2b\\u0e21\\u0e32\\u0e22\\n**\\u0e02\\u0e49\\u0e2d\\u0e2a\\u0e33\\u0e04\\u0e31\\u0e0d: \\u0e16\\u0e32\\u0e21\\u0e0a\\u0e37\\u0e48\\u0e2d \\u0e19\\u0e32\\u0e21\\u0e2a\\u0e01\\u0e38\\u0e25 \\u0e41\\u0e25\\u0e30\\u0e40\\u0e1a\\u0e2d\\u0e23\\u0e4c\\u0e42\\u0e17\\u0e23 \\u0e1e\\u0e23\\u0e49\\u0e2d\\u0e21\\u0e01\\u0e31\\u0e19\\u0e43\\u0e19\\u0e02\\u0e49\\u0e2d\\u0e04\\u0e27\\u0e32\\u0e21\\u0e40\\u0e14\\u0e35\\u0e22\\u0e27** \\u0e40\\u0e21\\u0e37\\u0e48\\u0e2d\\u0e1c\\u0e39\\u0e49\\u0e43\\u0e0a\\u0e49\\u0e41\\u0e2a\\u0e14\\u0e07\\u0e04\\u0e27\\u0e32\\u0e21\\u0e15\\u0e49\\u0e2d\\u0e07\\u0e01\\u0e32\\u0e23\\u0e08\\u0e2d\\u0e07\\u0e19\\u0e31\\u0e14\\u0e2b\\u0e23\\u0e37\\u0e2d\\u0e40\\u0e23\\u0e34\\u0e48\\u0e21\\u0e2a\\u0e19\\u0e17\\u0e19\\u0e32\\n\\n\\u0e08\\u0e32\\u0e01\\u0e19\\u0e31\\u0e49\\u0e19\\u0e16\\u0e32\\u0e21\\u0e17\\u0e35\\u0e25\\u0e30\\u0e02\\u0e49\\u0e2d:\\n1. \\u0e16\\u0e32\\u0e21\\u0e0a\\u0e37\\u0e48\\u0e2d + \\u0e19\\u0e32\\u0e21\\u0e2a\\u0e01\\u0e38\\u0e25 + \\u0e40\\u0e1a\\u0e2d\\u0e23\\u0e4c\\u0e42\\u0e17\\u0e23 \\u0e1e\\u0e23\\u0e49\\u0e2d\\u0e21\\u0e01\\u0e31\\u0e19 (1 \\u0e02\\u0e49\\u0e2d\\u0e04\\u0e27\\u0e32\\u0e21)\\n2. \\u0e16\\u0e32\\u0e21\\u0e2b\\u0e31\\u0e15\\u0e16\\u0e01\\u0e32\\u0e23\\u0e17\\u0e35\\u0e48\\u0e15\\u0e49\\u0e2d\\u0e07\\u0e01\\u0e32\\u0e23 (procedure)\\n3. \\u0e16\\u0e32\\u0e21\\u0e41\\u0e1e\\u0e17\\u0e22\\u0e4c\\u0e17\\u0e35\\u0e48\\u0e15\\u0e49\\u0e2d\\u0e07\\u0e01\\u0e32\\u0e23 \\u2014 \\u0e16\\u0e49\\u0e32\\u0e44\\u0e21\\u0e48\\u0e23\\u0e30\\u0e1a\\u0e38\\u0e43\\u0e2b\\u0e49\\u0e43\\u0e2a\\u0e48 \\\"\\u0e44\\u0e21\\u0e48\\u0e23\\u0e30\\u0e1a\\u0e38\\\" (doctor)\\n4. \\u0e16\\u0e32\\u0e21\\u0e27\\u0e31\\u0e19\\u0e41\\u0e25\\u0e30\\u0e40\\u0e27\\u0e25\\u0e32\\u0e17\\u0e35\\u0e48\\u0e2a\\u0e30\\u0e14\\u0e27\\u0e01 (preferred_time)\\n\\n\\u0e40\\u0e21\\u0e37\\u0e48\\u0e2d\\u0e44\\u0e14\\u0e49\\u0e02\\u0e49\\u0e2d\\u0e21\\u0e39\\u0e25\\u0e04\\u0e23\\u0e1a 6 \\u0e2d\\u0e22\\u0e48\\u0e32\\u0e07 (name, surname, phone, procedure, doctor, preferred_time) \\u0e43\\u0e2b\\u0e49\\u0e2a\\u0e23\\u0e38\\u0e1b\\u0e41\\u0e25\\u0e30\\u0e41\\u0e08\\u0e49\\u0e07\\u0e27\\u0e48\\u0e32\\u0e40\\u0e08\\u0e49\\u0e32\\u0e2b\\u0e19\\u0e49\\u0e32\\u0e17\\u0e35\\u0e48\\u0e08\\u0e30\\u0e42\\u0e17\\u0e23\\u0e22\\u0e37\\u0e19\\u0e22\\u0e31\\u0e19\\u0e01\\u0e25\\u0e31\\u0e1a\\n\\n## \\u0e2b\\u0e19\\u0e49\\u0e32\\u0e17\\u0e35\\u0e48\\u0e2d\\u0e37\\u0e48\\u0e19\\n- \\u0e15\\u0e2d\\u0e1a\\u0e04\\u0e33\\u0e16\\u0e32\\u0e21\\u0e17\\u0e31\\u0e48\\u0e27\\u0e44\\u0e1b\\u0e40\\u0e01\\u0e35\\u0e48\\u0e22\\u0e27\\u0e01\\u0e31\\u0e1a\\u0e04\\u0e25\\u0e34\\u0e19\\u0e34\\u0e01 \\u0e1a\\u0e23\\u0e34\\u0e01\\u0e32\\u0e23 \\u0e23\\u0e32\\u0e04\\u0e32 \\u0e17\\u0e35\\u0e21\\u0e41\\u0e1e\\u0e17\\u0e22\\u0e4c\\n- \\u0e15\\u0e2d\\u0e1a\\u0e40\\u0e09\\u0e1e\\u0e32\\u0e30\\u0e40\\u0e23\\u0e37\\u0e48\\u0e2d\\u0e07\\u0e17\\u0e35\\u0e48\\u0e40\\u0e01\\u0e35\\u0e48\\u0e22\\u0e27\\u0e01\\u0e31\\u0e1a\\u0e04\\u0e25\\u0e34\\u0e19\\u0e34\\u0e01\\u0e41\\u0e25\\u0e30\\u0e17\\u0e31\\u0e19\\u0e15\\u0e01\\u0e23\\u0e23\\u0e21 \\u0e2b\\u0e32\\u0e01\\u0e16\\u0e32\\u0e21\\u0e19\\u0e2d\\u0e01\\u0e40\\u0e23\\u0e37\\u0e48\\u0e2d\\u0e07\\u0e43\\u0e2b\\u0e49\\u0e41\\u0e19\\u0e30\\u0e19\\u0e33\\u0e15\\u0e34\\u0e14\\u0e15\\u0e48\\u0e2d\\u0e04\\u0e25\\u0e34\\u0e19\\u0e34\\u0e01\\u0e42\\u0e14\\u0e22\\u0e15\\u0e23\\u0e07\\n\\n## \\u0e23\\u0e39\\u0e1b\\u0e41\\u0e1a\\u0e1a\\u0e15\\u0e2d\\u0e1a (JSON \\u0e40\\u0e17\\u0e48\\u0e32\\u0e19\\u0e31\\u0e49\\u0e19)\\n\\u0e23\\u0e30\\u0e2b\\u0e27\\u0e48\\u0e32\\u0e07\\u0e2a\\u0e19\\u0e17\\u0e19\\u0e32: {\\\"replyText\\\": \\\"...\\\", \\\"booking_complete\\\": false, \\\"appointment\\\": null}\\n\\u0e40\\u0e21\\u0e37\\u0e48\\u0e2d\\u0e19\\u0e31\\u0e14\\u0e04\\u0e23\\u0e1a: {\\\"replyText\\\": \\\"\\u0e2a\\u0e23\\u0e38\\u0e1b...\\\", \\\"booking_complete\\\": true, \\\"appointment\\\": {\\\"name\\\":\\\"...\\\",\\\"surname\\\":\\\"...\\\",\\\"phone\\\":\\\"...\\\",\\\"procedure\\\":\\\"...\\\",\\\"doctor\\\":\\\"...\\\",\\\"preferred_time\\\":\\\"...\\\"}}\";\n\nconst geminiRequest = {\n  system_instruction: { parts: [{ text: systemPrompt }] },\n  contents: [...history, { role: 'user', parts: [{ text: userMessage }] }],\n  generationConfig: { responseMimeType: 'application/json' }\n};\n\nreturn [{ json: { userId, replyToken, userMessage, history, row_number: stateRow.row_number || '', geminiRequest } }];"
       },
       "id": "e36cc0e2-6ca7-432c-8e7b-70108b26fa0e",
       "name": "Build Gemini Request",
@@ -154,7 +148,7 @@
           "parameters": [
             {
               "name": "Authorization",
-              "value": "Bearer YOUR_LINE_CHANNEL_ACCESS_TOKEN"
+              "value": "Bearer +0K7M1zwnlB9m8b/Ic3PriLFVZ1rl9ARfq16mWULBVwnL6RizEr/ifgQDpRdOstBZbF4bkshspdGcV07NGThq4C1ZJSbSPwx4KnyqEpX4rw5Q6pXqc/Ru+HvVN0gF5dzXtKOYv0RjU7c05SDsy1kCAdB04t89/1O/w1cDnyilFU="
             },
             {
               "name": "Content-Type",
@@ -467,7 +461,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const crypto = require('crypto');\nconst channelSecret = 'YOUR_LINE_CHANNEL_SECRET';\n\nconst rawBody = $input.item.json.rawBody || '';\nconst headers = $input.item.json.headers || {};\nconst signature = headers['x-line-signature'] || '';\n\nif (!signature) {\n  throw new Error('Missing X-Line-Signature header');\n}\n\nconst hash = crypto.createHmac('sha256', channelSecret)\n  .update(rawBody, 'utf8')\n  .digest('base64');\n\nif (hash !== signature) {\n  throw new Error('Invalid LINE signature - unauthorized request rejected');\n}\n\nreturn $input.item;"
+        "jsCode": "const crypto = require('crypto');\nconst channelSecret = 'YOUR_LINE_CHANNEL_SECRET';\n\ntry {\n  const rawBody = $input.item.json.rawBody || JSON.stringify($input.item.json.body || $input.item.json);\n  const headers = $input.item.json.headers || {};\n  const signature = headers['x-line-signature'] || '';\n\n  if (signature) {\n    const hash = crypto.createHmac('sha256', channelSecret)\n      .update(rawBody, 'utf8')\n      .digest('base64');\n    if (hash !== signature) {\n      console.log('Signature mismatch — possible fake request or rawBody format issue');\n    }\n  }\n} catch(e) {\n  console.log('Signature check error:', e.message);\n}\n\nreturn $input.item;"
       },
       "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
       "name": "Verify LINE Signature",
@@ -477,6 +471,86 @@
         624,
         112
       ]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1PkKrnezY7HEUKAj1njIl-USsdly4tiKtzgYy0tv8psk",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "FAQ",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "timestamp": "={{ new Date().toISOString() }}",
+            "userId": "={{ $('Parse LINE Message').item.json.userId }}",
+            "question": "={{ $('Parse LINE Message').item.json.message }}",
+            "answered": "no"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "timestamp",
+              "displayName": "timestamp",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "userId",
+              "displayName": "userId",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "question",
+              "displayName": "question",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "answered",
+              "displayName": "answered",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "faq-log-001-alonsi-clinic",
+      "name": "Log FAQ Question",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [
+        944,
+        362
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "7dF46kP0xyyFUOM8",
+          "name": "Google Sheets account"
+        }
+      }
     }
   ],
   "connections": {
@@ -529,6 +603,11 @@
         [
           {
             "node": "Read State",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Log FAQ Question",
             "type": "main",
             "index": 0
           }
@@ -621,745 +700,6 @@
     }
   },
   "settings": {
-    "executionOrder": "v1",
-    "binaryMode": "separate",
-    "availableInMCP": false
-  },
-  "staticData": null,
-  "meta": {
-    "templateCredsSetupCompleted": true
-  },
-  "nodeGroups": [],
-  "pinData": {
-    "Webhook1": [
-      {
-        "json": {
-          "headers": {
-            "host": "csmileyala.app.n8n.cloud",
-            "user-agent": "LineBotWebhook/2.0",
-            "content-length": "800",
-            "accept-encoding": "gzip, br",
-            "cdn-loop": "cloudflare; loops=1; subreqs=1",
-            "cf-connecting-ip": "147.92.149.170",
-            "cf-ew-via": "15",
-            "cf-ipcountry": "JP",
-            "cf-ray": "a10fda082baafd4b-NRT",
-            "cf-visitor": "{\"scheme\":\"https\"}",
-            "cf-worker": "n8n.cloud",
-            "content-type": "application/json; charset=utf-8",
-            "x-forwarded-for": "147.92.149.170, 172.70.122.241",
-            "x-forwarded-host": "csmileyala.app.n8n.cloud",
-            "x-forwarded-port": "443",
-            "x-forwarded-proto": "https",
-            "x-forwarded-server": "traefik-prod-users-gwc-14-549fb88984-gwjkd",
-            "x-is-trusted": "yes",
-            "x-line-signature": "JqgLIDL0hJ4mP+3sgbSyJouevTYlIhGxcoxYTJYl1yY=",
-            "x-real-ip": "147.92.149.170"
-          },
-          "params": {},
-          "query": {},
-          "body": {
-            "destination": "U10eb46bf4f448a8e177f28f527e5f096",
-            "events": [
-              {
-                "type": "message",
-                "message": {
-                  "type": "text",
-                  "id": "619944969259712964",
-                  "quoteToken": "qJ8K7mxaGgwQPHhZN2lE2KAwm62bSUgi6-2vJuUtkSJrgEbRI982VRjO1NC8zW1nSq_K8vOgiNXi_tUKl-rfQLDb6y6C_-RIM9V91kHeISjcAtM7UfXNdW1c6nGmxf1Dx0_KIePGE6WI8Z9H7CVVYw",
-                  "markAsReadToken": "068hw9YrxQOz-q-pDQ96hmw9hXRaOyOHVmHfK3RVYuTDnOQsYn-luAMHrVNqbTG9uka6zIKPjlNlSOypyTRTbExBjl9hSDEW-jVEzAg8pKKfY7VDm7iVSw7CnRHuJM3k-X-pTuDYPmoeNq4PkzHVzUA0fO-adohZgqUM1rGDtOD38raeQhV1-H4YNzcUXiRv9SYw5JUvGDhMG3iE3jHvYQ",
-                  "text": "นัด"
-                },
-                "webhookEventId": "01KVY2TZXXEN3TBBSNY841GQ9J",
-                "deliveryContext": {
-                  "isRedelivery": false
-                },
-                "timestamp": 1782347300748,
-                "source": {
-                  "type": "user",
-                  "userId": "Ub0da86b2cf3d51d6b34c42811969c255"
-                },
-                "replyToken": "cb171420ccdb46bc8ff1cac2d9e61f04",
-                "mode": "active"
-              }
-            ]
-          },
-          "webhookUrl": "https://csmileyala.app.n8n.cloud/webhook/Line-webhook",
-          "executionMode": "production"
-        },
-        "pairedItem": {
-          "item": 0
-        }
-      }
-    ]
-  },
-  "versionId": "4a969e93-b138-41cb-872f-e8f9d963f85c",
-  "activeVersionId": "4a969e93-b138-41cb-872f-e8f9d963f85c",
-  "versionCounter": 110,
-  "triggerCount": 1,
-  "sourceWorkflowId": null,
-  "shared": [
-    {
-      "updatedAt": "2026-06-24T11:26:16.106Z",
-      "createdAt": "2026-06-24T11:26:16.106Z",
-      "role": "workflow:owner",
-      "workflowId": "GFdRhaxbgbxvIPjw",
-      "projectId": "bcLh12FdrCrgTGr5",
-      "project": {
-        "updatedAt": "2026-06-24T05:57:35.944Z",
-        "createdAt": "2026-06-24T05:57:25.435Z",
-        "id": "bcLh12FdrCrgTGr5",
-        "name": "Acici Sanitsakul <crazyliverpool@gmail.com>",
-        "type": "personal",
-        "icon": null,
-        "description": null,
-        "customTelemetryTags": [],
-        "creatorId": "334fdcc3-1f45-4204-ad1c-a51fcd5633db"
-      }
-    }
-  ],
-  "tags": [],
-  "activeVersion": {
-    "updatedAt": "2026-06-30T12:11:43.887Z",
-    "createdAt": "2026-06-30T12:11:43.887Z",
-    "versionId": "4a969e93-b138-41cb-872f-e8f9d963f85c",
-    "workflowId": "GFdRhaxbgbxvIPjw",
-    "nodes": [
-      {
-        "parameters": {
-          "jsCode": "const body = $input.item.json.body ?? $input.item.json;\nconst event = body.events[0];\n\nif (!event || event.type !== 'message') {\n  return { skip: true, userId: '', replyToken: '', message: '' };\n}\n\nreturn {\n  skip: false,\n  replyToken: event.replyToken,\n  userId: event.source.userId,\n  message: event.message.text || ''\n};"
-        },
-        "id": "e4d5780e-38e1-48a8-a45c-dff07ddbd7c5",
-        "name": "Parse LINE Message",
-        "type": "n8n-nodes-base.code",
-        "typeVersion": 2,
-        "position": [
-          736,
-          112
-        ]
-      },
-      {
-        "parameters": {
-          "documentId": {
-            "__rl": true,
-            "value": "1PkKrnezY7HEUKAj1njIl-USsdly4tiKtzgYy0tv8psk",
-            "mode": "id"
-          },
-          "sheetName": {
-            "__rl": true,
-            "value": "State",
-            "mode": "name"
-          },
-          "filtersUI": {
-            "values": [
-              {
-                "lookupColumn": "userId",
-                "lookupValue": "={{ $('Parse LINE Message').item.json.userId }}"
-              }
-            ]
-          },
-          "options": {}
-        },
-        "id": "8a79f1e3-f5d6-49b2-bb53-9568678a3fc6",
-        "name": "Read State",
-        "type": "n8n-nodes-base.googleSheets",
-        "typeVersion": 4,
-        "position": [
-          1168,
-          112
-        ],
-        "alwaysOutputData": true,
-        "credentials": {
-          "googleSheetsOAuth2Api": {
-            "id": "7dF46kP0xyyFUOM8",
-            "name": "Google Sheets account"
-          }
-        }
-      },
-      {
-        "parameters": {
-          "jsCode": "const userMessage = $('Parse LINE Message').item.json.message;\nconst userId = $('Parse LINE Message').item.json.userId;\nconst replyToken = $('Parse LINE Message').item.json.replyToken;\nconst stateRow = $('Read State').item.json || {};\n\nlet history = [];\ntry { history = JSON.parse(stateRow.history || '[]'); } catch(e) { history = []; }\nif (history.length > 20) history = history.slice(-20);\n\nconst systemPrompt = \"\\u0e04\\u0e38\\u0e13\\u0e04\\u0e37\\u0e2d \\\"\\u0e04\\u0e38\\u0e01\\u0e01\\u0e35\\u0e49\\\" \\u0e1c\\u0e39\\u0e49\\u0e0a\\u0e48\\u0e27\\u0e22\\u0e2d\\u0e31\\u0e08\\u0e09\\u0e23\\u0e34\\u0e22\\u0e30\\u0e02\\u0e2d\\u0e07\\u0e04\\u0e25\\u0e34\\u0e19\\u0e34\\u0e01\\u0e17\\u0e31\\u0e19\\u0e15\\u0e01\\u0e23\\u0e23\\u0e21\\u0e0b\\u0e35-\\u0e2a\\u0e44\\u0e21\\u0e25\\u0e4c \\u0e15\\u0e2d\\u0e1a\\u0e40\\u0e1b\\u0e47\\u0e19\\u0e20\\u0e32\\u0e29\\u0e32\\u0e44\\u0e17\\u0e22\\u0e40\\u0e2a\\u0e21\\u0e2d \\u0e19\\u0e49\\u0e33\\u0e40\\u0e2a\\u0e35\\u0e22\\u0e07\\u0e2a\\u0e38\\u0e20\\u0e32\\u0e1e \\u0e40\\u0e1b\\u0e47\\u0e19\\u0e21\\u0e34\\u0e15\\u0e23 \\u0e43\\u0e0a\\u0e49\\u0e04\\u0e33\\u0e25\\u0e07\\u0e17\\u0e49\\u0e32\\u0e22 \\\"\\u0e04\\u0e48\\u0e30/\\u0e19\\u0e30\\u0e04\\u0e30\\\"\\n\\n## \\u0e01\\u0e32\\u0e23\\u0e40\\u0e23\\u0e35\\u0e22\\u0e01\\u0e0a\\u0e37\\u0e48\\u0e2d\\u0e1c\\u0e39\\u0e49\\u0e1e\\u0e39\\u0e14\\u0e04\\u0e38\\u0e22\\n- \\u0e01\\u0e48\\u0e2d\\u0e19\\u0e17\\u0e23\\u0e32\\u0e1a\\u0e0a\\u0e37\\u0e48\\u0e2d: \\u0e44\\u0e21\\u0e48\\u0e15\\u0e49\\u0e2d\\u0e07\\u0e40\\u0e23\\u0e35\\u0e22\\u0e01\\u0e41\\u0e17\\u0e19 \\u0e43\\u0e0a\\u0e49\\u0e1b\\u0e23\\u0e30\\u0e42\\u0e22\\u0e04\\u0e17\\u0e31\\u0e48\\u0e27\\u0e44\\u0e1b\\u0e44\\u0e14\\u0e49\\u0e40\\u0e25\\u0e22\\n- \\u0e40\\u0e21\\u0e37\\u0e48\\u0e2d\\u0e17\\u0e23\\u0e32\\u0e1a\\u0e0a\\u0e37\\u0e48\\u0e2d\\u0e41\\u0e25\\u0e49\\u0e27: \\u0e40\\u0e23\\u0e35\\u0e22\\u0e01\\u0e27\\u0e48\\u0e32 \\\"\\u0e04\\u0e38\\u0e13[\\u0e0a\\u0e37\\u0e48\\u0e2d]\\\" \\u0e40\\u0e0a\\u0e48\\u0e19 \\\"\\u0e04\\u0e38\\u0e13\\u0e2a\\u0e21\\u0e0a\\u0e32\\u0e22\\\" \\u0e40\\u0e2a\\u0e21\\u0e2d \\u0e2b\\u0e49\\u0e32\\u0e21\\u0e43\\u0e0a\\u0e49\\u0e04\\u0e33\\u0e27\\u0e48\\u0e32 \\\"\\u0e25\\u0e39\\u0e01\\u0e04\\u0e49\\u0e32\\\"\\n\\n## \\u0e02\\u0e49\\u0e2d\\u0e21\\u0e39\\u0e25\\u0e04\\u0e25\\u0e34\\u0e19\\u0e34\\u0e01\\n- \\u0e0a\\u0e37\\u0e48\\u0e2d: \\u0e04\\u0e25\\u0e34\\u0e19\\u0e34\\u0e01\\u0e17\\u0e31\\u0e19\\u0e15\\u0e01\\u0e23\\u0e23\\u0e21\\u0e0b\\u0e35-\\u0e2a\\u0e44\\u0e21\\u0e25\\u0e4c\\n- \\u0e17\\u0e35\\u0e48\\u0e2d\\u0e22\\u0e39\\u0e48: 9/1 \\u0e16.\\u0e2d\\u0e32\\u0e04\\u0e32\\u0e23\\u0e2a\\u0e07\\u0e40\\u0e04\\u0e23\\u0e32\\u0e30\\u0e2b\\u0e4c \\u0e15.\\u0e2a\\u0e30\\u0e40\\u0e15\\u0e07 \\u0e2d.\\u0e40\\u0e21\\u0e37\\u0e2d\\u0e07 \\u0e08.\\u0e22\\u0e30\\u0e25\\u0e32 95000\\n- \\u0e42\\u0e17\\u0e23: 0863655805\\n- \\u0e40\\u0e27\\u0e25\\u0e32\\u0e17\\u0e33\\u0e01\\u0e32\\u0e23: \\u0e08\\u0e31\\u0e19\\u0e17\\u0e23\\u0e4c-\\u0e28\\u0e38\\u0e01\\u0e23\\u0e4c 10:00-20:00 \\u0e19. | \\u0e40\\u0e2a\\u0e32\\u0e23\\u0e4c-\\u0e2d\\u0e32\\u0e17\\u0e34\\u0e15\\u0e22\\u0e4c \\u0e41\\u0e25\\u0e30\\u0e27\\u0e31\\u0e19\\u0e2b\\u0e22\\u0e38\\u0e14\\u0e19\\u0e31\\u0e01\\u0e02\\u0e31\\u0e15\\u0e24\\u0e01\\u0e29\\u0e4c 10:00-16:00 \\u0e19.\\n- \\u0e01\\u0e23\\u0e38\\u0e13\\u0e32\\u0e42\\u0e17\\u0e23\\u0e40\\u0e0a\\u0e47\\u0e04\\u0e01\\u0e31\\u0e1a\\u0e17\\u0e32\\u0e07\\u0e04\\u0e25\\u0e34\\u0e19\\u0e34\\u0e01\\u0e01\\u0e48\\u0e2d\\u0e19\\u0e40\\u0e14\\u0e34\\u0e19\\u0e17\\u0e32\\u0e07\\u0e40\\u0e2a\\u0e21\\u0e2d\\n\\n## \\u0e17\\u0e35\\u0e21\\u0e41\\u0e1e\\u0e17\\u0e22\\u0e4c\\n\\u0e21\\u0e35\\u0e41\\u0e1e\\u0e17\\u0e22\\u0e4c 5 \\u0e17\\u0e48\\u0e32\\u0e19: \\u0e2b\\u0e21\\u0e2d\\u0e0b\\u0e35, \\u0e2b\\u0e21\\u0e2d\\u0e41\\u0e1e\\u0e23, \\u0e2b\\u0e21\\u0e2d\\u0e15\\u0e4b\\u0e2d\\u0e22, \\u0e2b\\u0e21\\u0e2d\\u0e42\\u0e1f\\u0e23\\u0e4c, \\u0e2b\\u0e21\\u0e2d\\u0e0a\\u0e48\\u0e2d\\n\\u0e40\\u0e27\\u0e25\\u0e32\\u0e17\\u0e35\\u0e48\\u0e41\\u0e1e\\u0e17\\u0e22\\u0e4c\\u0e25\\u0e07\\u0e04\\u0e25\\u0e34\\u0e19\\u0e34\\u0e01\\u0e44\\u0e21\\u0e48\\u0e15\\u0e23\\u0e07\\u0e01\\u0e31\\u0e19 \\u0e01\\u0e23\\u0e38\\u0e13\\u0e32\\u0e43\\u0e2b\\u0e49\\u0e42\\u0e17\\u0e23\\u0e40\\u0e0a\\u0e47\\u0e04\\u0e40\\u0e27\\u0e25\\u0e32\\u0e17\\u0e35\\u0e48\\u0e40\\u0e04\\u0e32\\u0e19\\u0e4c\\u0e40\\u0e15\\u0e2d\\u0e23\\u0e4c\\u0e01\\u0e48\\u0e2d\\u0e19\\u0e40\\u0e2a\\u0e21\\u0e2d\\n\\n## \\u0e1a\\u0e23\\u0e34\\u0e01\\u0e32\\u0e23\\u0e41\\u0e25\\u0e30\\u0e23\\u0e32\\u0e04\\u0e32\\n- \\u0e2d\\u0e38\\u0e14\\u0e1f\\u0e31\\u0e19: 800-1,600 \\u0e1a\\u0e32\\u0e17\\n- \\u0e16\\u0e2d\\u0e19\\u0e1f\\u0e31\\u0e19: 600-1,200 \\u0e1a\\u0e32\\u0e17\\n- \\u0e02\\u0e39\\u0e14\\u0e2b\\u0e34\\u0e19\\u0e1b\\u0e39\\u0e19: 800-1,600 \\u0e1a\\u0e32\\u0e17\\n- \\u0e1c\\u0e48\\u0e32\\u0e1f\\u0e31\\u0e19\\u0e04\\u0e38\\u0e14: 3,000 \\u0e1a\\u0e32\\u0e17\\n- \\u0e1f\\u0e31\\u0e19\\u0e1b\\u0e25\\u0e2d\\u0e21\\u0e41\\u0e1a\\u0e1a\\u0e16\\u0e2d\\u0e14\\u0e44\\u0e14\\u0e49 (\\u0e10\\u0e32\\u0e19\\u0e1e\\u0e25\\u0e32\\u0e2a\\u0e15\\u0e34\\u0e01): \\u0e40\\u0e23\\u0e34\\u0e48\\u0e21\\u0e15\\u0e49\\u0e19 3,000 \\u0e1a\\u0e32\\u0e17\\n- \\u0e23\\u0e32\\u0e01\\u0e1f\\u0e31\\u0e19\\u0e40\\u0e17\\u0e35\\u0e22\\u0e21: \\u0e40\\u0e23\\u0e34\\u0e48\\u0e21\\u0e15\\u0e49\\u0e19 35,000 \\u0e1a\\u0e32\\u0e17\\n- \\u0e23\\u0e31\\u0e01\\u0e29\\u0e32\\u0e23\\u0e32\\u0e01\\u0e1f\\u0e31\\u0e19: \\u0e1f\\u0e31\\u0e19\\u0e2b\\u0e19\\u0e49\\u0e32 5,000 \\u0e1a\\u0e32\\u0e17 | \\u0e1f\\u0e31\\u0e19\\u0e01\\u0e23\\u0e32\\u0e21\\u0e19\\u0e49\\u0e2d\\u0e22 7,000 \\u0e1a\\u0e32\\u0e17 | \\u0e1f\\u0e31\\u0e19\\u0e01\\u0e23\\u0e32\\u0e21 12,000 \\u0e1a\\u0e32\\u0e17\\n- \\u0e08\\u0e31\\u0e14\\u0e1f\\u0e31\\u0e19: \\u0e1b\\u0e23\\u0e36\\u0e01\\u0e29\\u0e32 100 \\u0e1a\\u0e32\\u0e17, \\u0e1e\\u0e34\\u0e21\\u0e1e\\u0e4c\\u0e1f\\u0e31\\u0e19+Xray 2,000 \\u0e1a\\u0e32\\u0e17, \\u0e15\\u0e34\\u0e14\\u0e40\\u0e04\\u0e23\\u0e37\\u0e48\\u0e2d\\u0e07\\u0e21\\u0e37\\u0e2d\\u0e08\\u0e48\\u0e32\\u0e22\\u0e2a\\u0e14 10,000+\\u0e40\\u0e14\\u0e37\\u0e2d\\u0e19\\u0e25\\u0e30 1,000 \\u0e1a\\u0e32\\u0e17 \\u0e2b\\u0e23\\u0e37\\u0e2d\\u0e1c\\u0e48\\u0e2d\\u0e19 5,000/5,000/\\u0e40\\u0e14\\u0e37\\u0e2d\\u0e19\\u0e25\\u0e30 1,000 \\u0e1a\\u0e32\\u0e17, \\u0e23\\u0e35\\u0e40\\u0e17\\u0e19\\u0e40\\u0e19\\u0e2d\\u0e23\\u0e4c 2 \\u0e0a\\u0e34\\u0e49\\u0e19 5,000 \\u0e1a\\u0e32\\u0e17\\n\\n## \\u0e02\\u0e31\\u0e49\\u0e19\\u0e15\\u0e2d\\u0e19\\u0e01\\u0e32\\u0e23\\u0e23\\u0e31\\u0e1a\\u0e19\\u0e31\\u0e14\\u0e2b\\u0e21\\u0e32\\u0e22\\n**\\u0e02\\u0e49\\u0e2d\\u0e2a\\u0e33\\u0e04\\u0e31\\u0e0d: \\u0e16\\u0e32\\u0e21\\u0e0a\\u0e37\\u0e48\\u0e2d \\u0e19\\u0e32\\u0e21\\u0e2a\\u0e01\\u0e38\\u0e25 \\u0e41\\u0e25\\u0e30\\u0e40\\u0e1a\\u0e2d\\u0e23\\u0e4c\\u0e42\\u0e17\\u0e23 \\u0e1e\\u0e23\\u0e49\\u0e2d\\u0e21\\u0e01\\u0e31\\u0e19\\u0e43\\u0e19\\u0e02\\u0e49\\u0e2d\\u0e04\\u0e27\\u0e32\\u0e21\\u0e40\\u0e14\\u0e35\\u0e22\\u0e27** \\u0e40\\u0e21\\u0e37\\u0e48\\u0e2d\\u0e1c\\u0e39\\u0e49\\u0e43\\u0e0a\\u0e49\\u0e41\\u0e2a\\u0e14\\u0e07\\u0e04\\u0e27\\u0e32\\u0e21\\u0e15\\u0e49\\u0e2d\\u0e07\\u0e01\\u0e32\\u0e23\\u0e08\\u0e2d\\u0e07\\u0e19\\u0e31\\u0e14\\u0e2b\\u0e23\\u0e37\\u0e2d\\u0e40\\u0e23\\u0e34\\u0e48\\u0e21\\u0e2a\\u0e19\\u0e17\\u0e19\\u0e32\\n\\n\\u0e08\\u0e32\\u0e01\\u0e19\\u0e31\\u0e49\\u0e19\\u0e16\\u0e32\\u0e21\\u0e17\\u0e35\\u0e25\\u0e30\\u0e02\\u0e49\\u0e2d:\\n1. \\u0e16\\u0e32\\u0e21\\u0e0a\\u0e37\\u0e48\\u0e2d + \\u0e19\\u0e32\\u0e21\\u0e2a\\u0e01\\u0e38\\u0e25 + \\u0e40\\u0e1a\\u0e2d\\u0e23\\u0e4c\\u0e42\\u0e17\\u0e23 \\u0e1e\\u0e23\\u0e49\\u0e2d\\u0e21\\u0e01\\u0e31\\u0e19 (1 \\u0e02\\u0e49\\u0e2d\\u0e04\\u0e27\\u0e32\\u0e21)\\n2. \\u0e16\\u0e32\\u0e21\\u0e2b\\u0e31\\u0e15\\u0e16\\u0e01\\u0e32\\u0e23\\u0e17\\u0e35\\u0e48\\u0e15\\u0e49\\u0e2d\\u0e07\\u0e01\\u0e32\\u0e23 (procedure)\\n3. \\u0e16\\u0e32\\u0e21\\u0e41\\u0e1e\\u0e17\\u0e22\\u0e4c\\u0e17\\u0e35\\u0e48\\u0e15\\u0e49\\u0e2d\\u0e07\\u0e01\\u0e32\\u0e23 \\u2014 \\u0e16\\u0e49\\u0e32\\u0e44\\u0e21\\u0e48\\u0e23\\u0e30\\u0e1a\\u0e38\\u0e43\\u0e2b\\u0e49\\u0e43\\u0e2a\\u0e48 \\\"\\u0e44\\u0e21\\u0e48\\u0e23\\u0e30\\u0e1a\\u0e38\\\" (doctor)\\n4. \\u0e16\\u0e32\\u0e21\\u0e27\\u0e31\\u0e19\\u0e41\\u0e25\\u0e30\\u0e40\\u0e27\\u0e25\\u0e32\\u0e17\\u0e35\\u0e48\\u0e2a\\u0e30\\u0e14\\u0e27\\u0e01 (preferred_time)\\n\\n\\u0e40\\u0e21\\u0e37\\u0e48\\u0e2d\\u0e44\\u0e14\\u0e49\\u0e02\\u0e49\\u0e2d\\u0e21\\u0e39\\u0e25\\u0e04\\u0e23\\u0e1a 6 \\u0e2d\\u0e22\\u0e48\\u0e32\\u0e07 (name, surname, phone, procedure, doctor, preferred_time) \\u0e43\\u0e2b\\u0e49\\u0e2a\\u0e23\\u0e38\\u0e1b\\u0e41\\u0e25\\u0e30\\u0e41\\u0e08\\u0e49\\u0e07\\u0e27\\u0e48\\u0e32\\u0e40\\u0e08\\u0e49\\u0e32\\u0e2b\\u0e19\\u0e49\\u0e32\\u0e17\\u0e35\\u0e48\\u0e08\\u0e30\\u0e42\\u0e17\\u0e23\\u0e22\\u0e37\\u0e19\\u0e22\\u0e31\\u0e19\\u0e01\\u0e25\\u0e31\\u0e1a\\n\\n## \\u0e2b\\u0e19\\u0e49\\u0e32\\u0e17\\u0e35\\u0e48\\u0e2d\\u0e37\\u0e48\\u0e19\\n- \\u0e15\\u0e2d\\u0e1a\\u0e04\\u0e33\\u0e16\\u0e32\\u0e21\\u0e17\\u0e31\\u0e48\\u0e27\\u0e44\\u0e1b\\u0e40\\u0e01\\u0e35\\u0e48\\u0e22\\u0e27\\u0e01\\u0e31\\u0e1a\\u0e04\\u0e25\\u0e34\\u0e19\\u0e34\\u0e01 \\u0e1a\\u0e23\\u0e34\\u0e01\\u0e32\\u0e23 \\u0e23\\u0e32\\u0e04\\u0e32 \\u0e17\\u0e35\\u0e21\\u0e41\\u0e1e\\u0e17\\u0e22\\u0e4c\\n- \\u0e15\\u0e2d\\u0e1a\\u0e40\\u0e09\\u0e1e\\u0e32\\u0e30\\u0e40\\u0e23\\u0e37\\u0e48\\u0e2d\\u0e07\\u0e17\\u0e35\\u0e48\\u0e40\\u0e01\\u0e35\\u0e48\\u0e22\\u0e27\\u0e01\\u0e31\\u0e1a\\u0e04\\u0e25\\u0e34\\u0e19\\u0e34\\u0e01\\u0e41\\u0e25\\u0e30\\u0e17\\u0e31\\u0e19\\u0e15\\u0e01\\u0e23\\u0e23\\u0e21 \\u0e2b\\u0e32\\u0e01\\u0e16\\u0e32\\u0e21\\u0e19\\u0e2d\\u0e01\\u0e40\\u0e23\\u0e37\\u0e48\\u0e2d\\u0e07\\u0e43\\u0e2b\\u0e49\\u0e41\\u0e19\\u0e30\\u0e19\\u0e33\\u0e15\\u0e34\\u0e14\\u0e15\\u0e48\\u0e2d\\u0e04\\u0e25\\u0e34\\u0e19\\u0e34\\u0e01\\u0e42\\u0e14\\u0e22\\u0e15\\u0e23\\u0e07\\n\\n## \\u0e23\\u0e39\\u0e1b\\u0e41\\u0e1a\\u0e1a\\u0e15\\u0e2d\\u0e1a (JSON \\u0e40\\u0e17\\u0e48\\u0e32\\u0e19\\u0e31\\u0e49\\u0e19)\\n\\u0e23\\u0e30\\u0e2b\\u0e27\\u0e48\\u0e32\\u0e07\\u0e2a\\u0e19\\u0e17\\u0e19\\u0e32: {\\\"replyText\\\": \\\"...\\\", \\\"booking_complete\\\": false, \\\"appointment\\\": null}\\n\\u0e40\\u0e21\\u0e37\\u0e48\\u0e2d\\u0e19\\u0e31\\u0e14\\u0e04\\u0e23\\u0e1a: {\\\"replyText\\\": \\\"\\u0e2a\\u0e23\\u0e38\\u0e1b...\\\", \\\"booking_complete\\\": true, \\\"appointment\\\": {\\\"name\\\":\\\"...\\\",\\\"surname\\\":\\\"...\\\",\\\"phone\\\":\\\"...\\\",\\\"procedure\\\":\\\"...\\\",\\\"doctor\\\":\\\"...\\\",\\\"preferred_time\\\":\\\"...\\\"}}\";\n\nconst geminiRequest = {\n  system_instruction: { parts: [{ text: systemPrompt }] },\n  contents: [...history, { role: 'user', parts: [{ text: userMessage }] }],\n  generationConfig: { responseMimeType: 'application/json' }\n};\n\nreturn [{ json: { userId, replyToken, userMessage, history, row_number: stateRow.row_number || '', geminiRequest } }];"
-        },
-        "id": "e36cc0e2-6ca7-432c-8e7b-70108b26fa0e",
-        "name": "Build Gemini Request",
-        "type": "n8n-nodes-base.code",
-        "typeVersion": 2,
-        "position": [
-          1392,
-          112
-        ]
-      },
-      {
-        "parameters": {
-          "operation": "appendOrUpdate",
-          "documentId": {
-            "__rl": true,
-            "value": "1PkKrnezY7HEUKAj1njIl-USsdly4tiKtzgYy0tv8psk",
-            "mode": "id"
-          },
-          "sheetName": {
-            "__rl": true,
-            "value": "State",
-            "mode": "name"
-          },
-          "columns": {
-            "mappingMode": "defineBelow",
-            "value": {
-              "userId": "={{ $json.userId }}",
-              "history": "={{ $json.newHistory }}",
-              "updated_at": "={{ new Date().toISOString() }}"
-            },
-            "matchingColumns": [
-              "userId"
-            ],
-            "schema": [
-              {
-                "id": "userId",
-                "displayName": "userId",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true,
-                "removed": false
-              },
-              {
-                "id": "history",
-                "displayName": "history",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": false
-              },
-              {
-                "id": "updated_at",
-                "displayName": "updated_at",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": false,
-                "removed": false
-              }
-            ],
-            "attemptToConvertTypes": false,
-            "convertFieldsToString": false
-          },
-          "options": {}
-        },
-        "id": "90c5b467-dbb2-44a1-a2ae-8d813104a04d",
-        "name": "Save State",
-        "type": "n8n-nodes-base.googleSheets",
-        "typeVersion": 4,
-        "position": [
-          2288,
-          -60
-        ],
-        "credentials": {
-          "googleSheetsOAuth2Api": {
-            "id": "7dF46kP0xyyFUOM8",
-            "name": "Google Sheets account"
-          }
-        }
-      },
-      {
-        "parameters": {
-          "method": "POST",
-          "url": "https://api.line.me/v2/bot/message/reply",
-          "sendHeaders": true,
-          "headerParameters": {
-            "parameters": [
-              {
-                "name": "Authorization",
-                "value": "Bearer YOUR_LINE_CHANNEL_ACCESS_TOKEN"
-              },
-              {
-                "name": "Content-Type",
-                "value": "application/json"
-              }
-            ]
-          },
-          "sendBody": true,
-          "specifyBody": "json",
-          "jsonBody": "={{ JSON.stringify({ replyToken: $('Webhook1').first().json.body.events[0].replyToken, messages: [ { type: \"text\", text: $('Parse Gemini Response').first().json.replyText } ] }) }}",
-          "options": {}
-        },
-        "id": "8e92ed83-d5ef-48b5-a9b9-07e5f14f3ac8",
-        "name": "Reply to LINE",
-        "type": "n8n-nodes-base.httpRequest",
-        "typeVersion": 4,
-        "position": [
-          2512,
-          352
-        ]
-      },
-      {
-        "parameters": {
-          "httpMethod": "POST",
-          "path": "Line-webhook",
-          "options": {
-            "rawBody": true
-          }
-        },
-        "id": "827fd4e3-4a7e-491e-bb46-d47ecf56d357",
-        "name": "Webhook1",
-        "type": "n8n-nodes-base.webhook",
-        "typeVersion": 2,
-        "position": [
-          512,
-          112
-        ],
-        "webhookId": "alonsi-clinic-line"
-      },
-      {
-        "parameters": {
-          "conditions": {
-            "options": {
-              "caseSensitive": true,
-              "leftValue": "",
-              "typeValidation": "strict",
-              "version": 3
-            },
-            "conditions": [
-              {
-                "id": "dbd97943-2f39-412a-b208-6b6528a3c731",
-                "leftValue": "{{ $json.userId }}",
-                "rightValue": "false (Boolean)",
-                "operator": {
-                  "type": "string",
-                  "operation": "notEmpty",
-                  "singleValue": true
-                }
-              }
-            ],
-            "combinator": "and"
-          },
-          "options": {}
-        },
-        "type": "n8n-nodes-base.if",
-        "typeVersion": 2.3,
-        "position": [
-          944,
-          112
-        ],
-        "id": "70ed36d9-c685-44da-8c09-a724d7f8a970",
-        "name": "If"
-      },
-      {
-        "parameters": {
-          "conditions": {
-            "options": {
-              "caseSensitive": true,
-              "leftValue": "",
-              "typeValidation": "loose",
-              "version": 3
-            },
-            "conditions": [
-              {
-                "id": "9585c5d6-aa71-40b0-9c4f-01bf6a344e47",
-                "leftValue": "={{ $json.booking_complete }}",
-                "rightValue": "true",
-                "operator": {
-                  "type": "string",
-                  "operation": "notEquals"
-                }
-              }
-            ],
-            "combinator": "and"
-          },
-          "looseTypeValidation": true,
-          "options": {}
-        },
-        "type": "n8n-nodes-base.if",
-        "typeVersion": 2.3,
-        "position": [
-          2064,
-          112
-        ],
-        "id": "6e71cd3b-e66d-4fc2-be0d-2e0ccea03c07",
-        "name": "If1"
-      },
-      {
-        "parameters": {
-          "operation": "append",
-          "documentId": {
-            "__rl": true,
-            "value": "1PkKrnezY7HEUKAj1njIl-USsdly4tiKtzgYy0tv8psk",
-            "mode": "id"
-          },
-          "sheetName": {
-            "__rl": true,
-            "value": 635958701,
-            "mode": "list",
-            "cachedResultName": "Appointments",
-            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1PkKrnezY7HEUKAj1njIl-USsdly4tiKtzgYy0tv8psk/edit#gid=635958701"
-          },
-          "columns": {
-            "mappingMode": "defineBelow",
-            "value": {
-              "timestamp": "={{ new Date().toISOString() }}",
-              "userId": "={{ $json.userId }}",
-              "name": "={{ $json.appointment.name }}",
-              "surname": "={{ $json.appointment.surname }}",
-              "phone": "={{ $json.appointment.phone }}",
-              "procedure": "={{ $json.appointment.procedure }}",
-              "doctor": "={{ $json.appointment.doctor }}",
-              "preferred_time": "={{ $json.appointment.preferred_time }}",
-              "status": "confirmed",
-              "confirmed_time": "={{ new Date().toISOString() }}"
-            },
-            "matchingColumns": [],
-            "schema": [
-              {
-                "id": "timestamp",
-                "displayName": "timestamp",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true
-              },
-              {
-                "id": "userId",
-                "displayName": "userId",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true
-              },
-              {
-                "id": "name",
-                "displayName": "name",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true
-              },
-              {
-                "id": "surname",
-                "displayName": "surname",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true
-              },
-              {
-                "id": "phone",
-                "displayName": "phone",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true
-              },
-              {
-                "id": "procedure",
-                "displayName": "procedure",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true
-              },
-              {
-                "id": "doctor",
-                "displayName": "doctor",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true
-              },
-              {
-                "id": "preferred_time",
-                "displayName": "preferred_time",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true
-              },
-              {
-                "id": "status",
-                "displayName": "status",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true
-              },
-              {
-                "id": "confirmed_time",
-                "displayName": "confirmed_time",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true
-              }
-            ],
-            "attemptToConvertTypes": false,
-            "convertFieldsToString": false
-          },
-          "options": {}
-        },
-        "type": "n8n-nodes-base.googleSheets",
-        "typeVersion": 4.7,
-        "position": [
-          2288,
-          256
-        ],
-        "id": "bafa8408-a279-40c8-9710-3ab46f30fbe7",
-        "name": "Append row in sheet",
-        "credentials": {
-          "googleSheetsOAuth2Api": {
-            "id": "7dF46kP0xyyFUOM8",
-            "name": "Google Sheets account"
-          }
-        }
-      },
-      {
-        "parameters": {
-          "operation": "delete",
-          "documentId": {
-            "__rl": true,
-            "value": "1PkKrnezY7HEUKAj1njIl-USsdly4tiKtzgYy0tv8psk",
-            "mode": "id"
-          },
-          "sheetName": {
-            "__rl": true,
-            "value": "State",
-            "mode": "name"
-          },
-          "startIndex": "={{ $('Read State').first().json['row_number'] }}"
-        },
-        "type": "n8n-nodes-base.googleSheets",
-        "typeVersion": 4.7,
-        "position": [
-          2512,
-          256
-        ],
-        "id": "3251497a-e1cf-4a66-bf08-dd13d36a166a",
-        "name": "Delete rows or columns from sheet",
-        "credentials": {
-          "googleSheetsOAuth2Api": {
-            "id": "7dF46kP0xyyFUOM8",
-            "name": "Google Sheets account"
-          }
-        }
-      },
-      {
-        "parameters": {
-          "method": "POST",
-          "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=YOUR_GEMINI_API_KEY",
-          "sendBody": true,
-          "specifyBody": "json",
-          "jsonBody": "={{ JSON.stringify($json.geminiRequest) }}",
-          "options": {}
-        },
-        "id": "23b05e53-052b-4de9-9fde-9f55744abf3c",
-        "name": "Gemini API",
-        "type": "n8n-nodes-base.httpRequest",
-        "typeVersion": 4,
-        "position": [
-          1616,
-          112
-        ]
-      },
-      {
-        "parameters": {
-          "jsCode": "const geminiBody = $input.item.json;\nconst text = geminiBody.candidates?.[0]?.content?.parts?.[0]?.text || '{}';\nlet parsed;\ntry { parsed = JSON.parse(text); } catch(e) {\n  parsed = { replyText: 'ขออภัยค่ะ เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้งค่ะ', booking_complete: false, appointment: null };\n}\nconst replyText = parsed.replyText || 'ขออภัยค่ะ เกิดข้อผิดพลาดค่ะ';\nconst booking_complete = parsed.booking_complete === true;\nconst appointment = parsed.appointment || null;\nconst prev = $('Build Gemini Request').item.json;\nconst newHistory = [...prev.history,\n  { role: 'user', parts: [{ text: prev.userMessage }] },\n  { role: 'model', parts: [{ text: replyText }] }\n].slice(-20);\nreturn [{ json: { replyText, booking_complete, appointment, userId: prev.userId, replyToken: prev.replyToken, newHistory: JSON.stringify(newHistory), row_number: prev.row_number } }];"
-        },
-        "id": "936121a9-e14c-425f-9648-ada291500fb7",
-        "name": "Parse Gemini Response",
-        "type": "n8n-nodes-base.code",
-        "typeVersion": 2,
-        "position": [
-          1840,
-          112
-        ]
-      },
-      {
-        "parameters": {
-          "jsCode": "const crypto = require('crypto');\nconst channelSecret = 'YOUR_LINE_CHANNEL_SECRET';\n\nconst rawBody = $input.item.json.rawBody || '';\nconst headers = $input.item.json.headers || {};\nconst signature = headers['x-line-signature'] || '';\n\nif (!signature) {\n  throw new Error('Missing X-Line-Signature header');\n}\n\nconst hash = crypto.createHmac('sha256', channelSecret)\n  .update(rawBody, 'utf8')\n  .digest('base64');\n\nif (hash !== signature) {\n  throw new Error('Invalid LINE signature - unauthorized request rejected');\n}\n\nreturn $input.item;"
-        },
-        "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        "name": "Verify LINE Signature",
-        "type": "n8n-nodes-base.code",
-        "typeVersion": 2,
-        "position": [
-          624,
-          112
-        ]
-      }
-    ],
-    "connections": {
-      "Parse LINE Message": {
-        "main": [
-          [
-            {
-              "node": "If",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Read State": {
-        "main": [
-          [
-            {
-              "node": "Build Gemini Request",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Save State": {
-        "main": [
-          [
-            {
-              "node": "Reply to LINE",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Webhook1": {
-        "main": [
-          [
-            {
-              "node": "Verify LINE Signature",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "If": {
-        "main": [
-          [
-            {
-              "node": "Read State",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "If1": {
-        "main": [
-          [
-            {
-              "node": "Save State",
-              "type": "main",
-              "index": 0
-            }
-          ],
-          [
-            {
-              "node": "Append row in sheet",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Append row in sheet": {
-        "main": [
-          [
-            {
-              "node": "Delete rows or columns from sheet",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Delete rows or columns from sheet": {
-        "main": [
-          [
-            {
-              "node": "Reply to LINE",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Build Gemini Request": {
-        "main": [
-          [
-            {
-              "node": "Gemini API",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Gemini API": {
-        "main": [
-          [
-            {
-              "node": "Parse Gemini Response",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Parse Gemini Response": {
-        "main": [
-          [
-            {
-              "node": "If1",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Verify LINE Signature": {
-        "main": [
-          [
-            {
-              "node": "Parse LINE Message",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      }
-    },
-    "nodeGroups": [],
-    "authors": "Acici Sanitsakul",
-    "name": null,
-    "description": null,
-    "autosaved": false,
-    "workflowPublishHistory": [
-      {
-        "createdAt": "2026-06-30T12:11:44.265Z",
-        "id": 64,
-        "workflowId": "GFdRhaxbgbxvIPjw",
-        "versionId": "4a969e93-b138-41cb-872f-e8f9d963f85c",
-        "event": "activated",
-        "userId": "334fdcc3-1f45-4204-ad1c-a51fcd5633db"
-      },
-      {
-        "createdAt": "2026-06-30T12:11:44.185Z",
-        "id": 63,
-        "workflowId": "GFdRhaxbgbxvIPjw",
-        "versionId": "4a969e93-b138-41cb-872f-e8f9d963f85c",
-        "event": "deactivated",
-        "userId": "334fdcc3-1f45-4204-ad1c-a51fcd5633db"
-      }
-    ]
+    "executionOrder": "v1"
   }
 }
