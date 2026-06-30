@@ -9,10 +9,7 @@
       "name": "Parse LINE Message",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [
-        736,
-        112
-      ]
+      "position": [736, 112]
     },
     {
       "parameters": {
@@ -40,10 +37,7 @@
       "name": "Read State",
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4,
-      "position": [
-        1168,
-        112
-      ],
+      "position": [1168, 112],
       "alwaysOutputData": true,
       "credentials": {
         "googleSheetsOAuth2Api": {
@@ -60,10 +54,7 @@
       "name": "Build Gemini Request",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [
-        1392,
-        112
-      ]
+      "position": [1392, 112]
     },
     {
       "parameters": {
@@ -85,39 +76,11 @@
             "history": "={{ $json.newHistory }}",
             "updated_at": "={{ new Date().toISOString() }}"
           },
-          "matchingColumns": [
-            "userId"
-          ],
+          "matchingColumns": ["userId"],
           "schema": [
-            {
-              "id": "userId",
-              "displayName": "userId",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "history",
-              "displayName": "history",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": false
-            },
-            {
-              "id": "updated_at",
-              "displayName": "updated_at",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": false,
-              "removed": false
-            }
+            { "id": "userId", "displayName": "userId", "required": false, "defaultMatch": false, "display": true, "type": "string", "canBeUsedToMatch": true, "removed": false },
+            { "id": "history", "displayName": "history", "required": false, "defaultMatch": false, "display": true, "type": "string", "canBeUsedToMatch": false },
+            { "id": "updated_at", "displayName": "updated_at", "required": false, "defaultMatch": false, "display": true, "type": "string", "canBeUsedToMatch": false, "removed": false }
           ],
           "attemptToConvertTypes": false,
           "convertFieldsToString": false
@@ -128,10 +91,7 @@
       "name": "Save State",
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4,
-      "position": [
-        2288,
-        -60
-      ],
+      "position": [2288, -60],
       "credentials": {
         "googleSheetsOAuth2Api": {
           "id": "7dF46kP0xyyFUOM8",
@@ -146,14 +106,8 @@
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
-            {
-              "name": "Authorization",
-              "value": "Bearer +0K7M1zwnlB9m8b/Ic3PriLFVZ1rl9ARfq16mWULBVwnL6RizEr/ifgQDpRdOstBZbF4bkshspdGcV07NGThq4C1ZJSbSPwx4KnyqEpX4rw5Q6pXqc/Ru+HvVN0gF5dzXtKOYv0RjU7c05SDsy1kCAdB04t89/1O/w1cDnyilFU="
-            },
-            {
-              "name": "Content-Type",
-              "value": "application/json"
-            }
+            { "name": "Authorization", "value": "Bearer +0K7M1zwnlB9m8b/Ic3PriLFVZ1rl9ARfq16mWULBVwnL6RizEr/ifgQDpRdOstBZbF4bkshspdGcV07NGThq4C1ZJSbSPwx4KnyqEpX4rw5Q6pXqc/Ru+HvVN0gF5dzXtKOYv0RjU7c05SDsy1kCAdB04t89/1O/w1cDnyilFU=" },
+            { "name": "Content-Type", "value": "application/json" }
           ]
         },
         "sendBody": true,
@@ -165,48 +119,31 @@
       "name": "Reply to LINE",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4,
-      "position": [
-        2512,
-        352
-      ]
+      "position": [2512, 352]
     },
     {
       "parameters": {
         "httpMethod": "POST",
         "path": "Line-webhook",
-        "options": {
-          "rawBody": true
-        }
+        "options": { "rawBody": true }
       },
       "id": "827fd4e3-4a7e-491e-bb46-d47ecf56d357",
       "name": "Webhook1",
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2,
-      "position": [
-        512,
-        112
-      ],
+      "position": [512, 112],
       "webhookId": "alonsi-clinic-line"
     },
     {
       "parameters": {
         "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict",
-            "version": 3
-          },
+          "options": { "caseSensitive": true, "leftValue": "", "typeValidation": "strict", "version": 3 },
           "conditions": [
             {
               "id": "dbd97943-2f39-412a-b208-6b6528a3c731",
               "leftValue": "{{ $json.userId }}",
               "rightValue": "false (Boolean)",
-              "operator": {
-                "type": "string",
-                "operation": "notEmpty",
-                "singleValue": true
-              }
+              "operator": { "type": "string", "operation": "notEmpty", "singleValue": true }
             }
           ],
           "combinator": "and"
@@ -215,31 +152,20 @@
       },
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
-      "position": [
-        944,
-        112
-      ],
+      "position": [944, 112],
       "id": "70ed36d9-c685-44da-8c09-a724d7f8a970",
       "name": "If"
     },
     {
       "parameters": {
         "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "loose",
-            "version": 3
-          },
+          "options": { "caseSensitive": true, "leftValue": "", "typeValidation": "loose", "version": 3 },
           "conditions": [
             {
               "id": "9585c5d6-aa71-40b0-9c4f-01bf6a344e47",
               "leftValue": "={{ $json.booking_complete }}",
               "rightValue": "true",
-              "operator": {
-                "type": "string",
-                "operation": "notEquals"
-              }
+              "operator": { "type": "string", "operation": "notEquals" }
             }
           ],
           "combinator": "and"
@@ -249,10 +175,7 @@
       },
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
-      "position": [
-        2064,
-        112
-      ],
+      "position": [2064, 112],
       "id": "6e71cd3b-e66d-4fc2-be0d-2e0ccea03c07",
       "name": "If1"
     },
@@ -287,96 +210,16 @@
           },
           "matchingColumns": [],
           "schema": [
-            {
-              "id": "timestamp",
-              "displayName": "timestamp",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "userId",
-              "displayName": "userId",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "name",
-              "displayName": "name",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "surname",
-              "displayName": "surname",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "phone",
-              "displayName": "phone",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "procedure",
-              "displayName": "procedure",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "doctor",
-              "displayName": "doctor",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "preferred_time",
-              "displayName": "preferred_time",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "status",
-              "displayName": "status",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "confirmed_time",
-              "displayName": "confirmed_time",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            }
+            { "id": "timestamp", "displayName": "timestamp", "required": false, "defaultMatch": false, "display": true, "type": "string", "canBeUsedToMatch": true },
+            { "id": "userId", "displayName": "userId", "required": false, "defaultMatch": false, "display": true, "type": "string", "canBeUsedToMatch": true },
+            { "id": "name", "displayName": "name", "required": false, "defaultMatch": false, "display": true, "type": "string", "canBeUsedToMatch": true },
+            { "id": "surname", "displayName": "surname", "required": false, "defaultMatch": false, "display": true, "type": "string", "canBeUsedToMatch": true },
+            { "id": "phone", "displayName": "phone", "required": false, "defaultMatch": false, "display": true, "type": "string", "canBeUsedToMatch": true },
+            { "id": "procedure", "displayName": "procedure", "required": false, "defaultMatch": false, "display": true, "type": "string", "canBeUsedToMatch": true },
+            { "id": "doctor", "displayName": "doctor", "required": false, "defaultMatch": false, "display": true, "type": "string", "canBeUsedToMatch": true },
+            { "id": "preferred_time", "displayName": "preferred_time", "required": false, "defaultMatch": false, "display": true, "type": "string", "canBeUsedToMatch": true },
+            { "id": "status", "displayName": "status", "required": false, "defaultMatch": false, "display": true, "type": "string", "canBeUsedToMatch": true },
+            { "id": "confirmed_time", "displayName": "confirmed_time", "required": false, "defaultMatch": false, "display": true, "type": "string", "canBeUsedToMatch": true }
           ],
           "attemptToConvertTypes": false,
           "convertFieldsToString": false
@@ -385,10 +228,7 @@
       },
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
-      "position": [
-        2288,
-        256
-      ],
+      "position": [2288, 256],
       "id": "bafa8408-a279-40c8-9710-3ab46f30fbe7",
       "name": "Append row in sheet",
       "credentials": {
@@ -415,10 +255,7 @@
       },
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
-      "position": [
-        2512,
-        256
-      ],
+      "position": [2512, 256],
       "id": "3251497a-e1cf-4a66-bf08-dd13d36a166a",
       "name": "Delete rows or columns from sheet",
       "credentials": {
@@ -441,10 +278,7 @@
       "name": "Gemini API",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4,
-      "position": [
-        1616,
-        112
-      ]
+      "position": [1616, 112]
     },
     {
       "parameters": {
@@ -454,10 +288,7 @@
       "name": "Parse Gemini Response",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [
-        1840,
-        112
-      ]
+      "position": [1840, 112]
     },
     {
       "parameters": {
@@ -467,10 +298,7 @@
       "name": "Verify LINE Signature",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [
-        624,
-        112
-      ]
+      "position": [624, 112]
     },
     {
       "parameters": {
@@ -495,42 +323,10 @@
           },
           "matchingColumns": [],
           "schema": [
-            {
-              "id": "timestamp",
-              "displayName": "timestamp",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": false
-            },
-            {
-              "id": "userId",
-              "displayName": "userId",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": false
-            },
-            {
-              "id": "question",
-              "displayName": "question",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": false
-            },
-            {
-              "id": "answered",
-              "displayName": "answered",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": false
-            }
+            { "id": "timestamp", "displayName": "timestamp", "required": false, "defaultMatch": false, "display": true, "type": "string", "canBeUsedToMatch": false },
+            { "id": "userId", "displayName": "userId", "required": false, "defaultMatch": false, "display": true, "type": "string", "canBeUsedToMatch": false },
+            { "id": "question", "displayName": "question", "required": false, "defaultMatch": false, "display": true, "type": "string", "canBeUsedToMatch": false },
+            { "id": "answered", "displayName": "answered", "required": false, "defaultMatch": false, "display": true, "type": "string", "canBeUsedToMatch": false }
           ],
           "attemptToConvertTypes": false,
           "convertFieldsToString": false
@@ -541,162 +337,339 @@
       "name": "Log FAQ Question",
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4,
-      "position": [
-        944,
-        362
-      ],
+      "position": [944, 362],
       "credentials": {
         "googleSheetsOAuth2Api": {
           "id": "7dF46kP0xyyFUOM8",
           "name": "Google Sheets account"
         }
       }
+    },
+    {
+      "parameters": {
+        "jsCode": "const msg = ($('Parse LINE Message').item.json.message || '').trim();\nconst userId = $('Parse LINE Message').item.json.userId;\nconst replyToken = $('Parse LINE Message').item.json.replyToken;\nconst state = $('Read State').item.json || {};\nconst isHandoff = state.handoff === 'true';\n\nconst resetWords = ['จบแล้วค่ะ', 'จบแล้ว', 'จบ', 'เสร็จแล้ว'];\nconst triggerWords = ['คุยกับหมอ', 'ต่อหมอ', 'อยากคุยกับคน', 'ขอคุยกับหมอ'];\n\nconst isReset = resetWords.some(w => msg.includes(w));\nconst isTrigger = triggerWords.some(w => msg.includes(w));\n\nlet mode = 'normal';\nif (isHandoff && isReset) mode = 'reset';\nelse if (isHandoff) mode = 'active';\nelse if (isTrigger) mode = 'trigger';\n\nreturn [{ json: { mode, userId, replyToken, row_number: state.row_number || '' } }];"
+      },
+      "id": "aa000001-0000-0000-0000-000000000001",
+      "name": "Check Handoff Mode",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1280, 350]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": true, "leftValue": "", "typeValidation": "loose", "version": 3 },
+          "conditions": [
+            {
+              "id": "nm-001-condition",
+              "leftValue": "={{ $json.mode }}",
+              "rightValue": "normal",
+              "operator": { "type": "string", "operation": "equals" }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [1500, 350],
+      "id": "aa000002-0000-0000-0000-000000000002",
+      "name": "If Normal Mode"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": true, "leftValue": "", "typeValidation": "loose", "version": 3 },
+          "conditions": [
+            {
+              "id": "trigger-001-condition",
+              "leftValue": "={{ $json.mode }}",
+              "rightValue": "trigger",
+              "operator": { "type": "string", "operation": "equals" }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [1700, 500],
+      "id": "aa000003-0000-0000-0000-000000000003",
+      "name": "If Is Trigger"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1PkKrnezY7HEUKAj1njIl-USsdly4tiKtzgYy0tv8psk",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "State",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "userId": "={{ $json.userId }}",
+            "handoff": "true",
+            "updated_at": "={{ new Date().toISOString() }}"
+          },
+          "matchingColumns": ["userId"],
+          "schema": [
+            { "id": "userId", "displayName": "userId", "required": false, "defaultMatch": false, "display": true, "type": "string", "canBeUsedToMatch": true, "removed": false },
+            { "id": "handoff", "displayName": "handoff", "required": false, "defaultMatch": false, "display": true, "type": "string", "canBeUsedToMatch": false, "removed": false },
+            { "id": "updated_at", "displayName": "updated_at", "required": false, "defaultMatch": false, "display": true, "type": "string", "canBeUsedToMatch": false, "removed": false }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "aa000004-0000-0000-0000-000000000004",
+      "name": "Set Handoff True",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [1900, 400],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "7dF46kP0xyyFUOM8",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.line.me/v2/bot/message/push",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Authorization", "value": "Bearer +0K7M1zwnlB9m8b/Ic3PriLFVZ1rl9ARfq16mWULBVwnL6RizEr/ifgQDpRdOstBZbF4bkshspdGcV07NGThq4C1ZJSbSPwx4KnyqEpX4rw5Q6pXqc/Ru+HvVN0gF5dzXtKOYv0RjU7c05SDsy1kCAdB04t89/1O/w1cDnyilFU=" },
+            { "name": "Content-Type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ to: \"Ub0da86b2cf3d51d6b34c42811969c255\", messages: [{ type: \"text\", text: \"มีคนไข้ต้องการคุยกับหมอค่ะ\\n\\nเปิด LINE OA Manager > Chats เพื่อตอบได้เลยค่ะ\" }] }) }}",
+        "options": {}
+      },
+      "id": "aa000005-0000-0000-0000-000000000005",
+      "name": "Push Notify Admin",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [2100, 400]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.line.me/v2/bot/message/reply",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Authorization", "value": "Bearer +0K7M1zwnlB9m8b/Ic3PriLFVZ1rl9ARfq16mWULBVwnL6RizEr/ifgQDpRdOstBZbF4bkshspdGcV07NGThq4C1ZJSbSPwx4KnyqEpX4rw5Q6pXqc/Ru+HvVN0gF5dzXtKOYv0RjU7c05SDsy1kCAdB04t89/1O/w1cDnyilFU=" },
+            { "name": "Content-Type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ replyToken: $('Check Handoff Mode').first().json.replyToken, messages: [{ type: \"text\", text: \"รับทราบค่ะ กำลังแจ้งหมอให้นะคะ รอสักครู่ค่ะ\\n\\nเมื่อคุยกับหมอเสร็จแล้ว กดปุ่มด้านล่างเพื่อให้บอทกลับมาช่วยได้เลยนะคะ\", quickReply: { items: [{ type: \"action\", action: { type: \"message\", label: \"จบแล้วค่ะ\", text: \"จบแล้วค่ะ\" } }] } }] }) }}",
+        "options": {}
+      },
+      "id": "aa000006-0000-0000-0000-000000000006",
+      "name": "Reply Handoff Start",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [2300, 400]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": true, "leftValue": "", "typeValidation": "loose", "version": 3 },
+          "conditions": [
+            {
+              "id": "reset-001-condition",
+              "leftValue": "={{ $json.mode }}",
+              "rightValue": "reset",
+              "operator": { "type": "string", "operation": "equals" }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [1900, 620],
+      "id": "aa000007-0000-0000-0000-000000000007",
+      "name": "If Is Reset"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1PkKrnezY7HEUKAj1njIl-USsdly4tiKtzgYy0tv8psk",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "State",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "userId": "={{ $json.userId }}",
+            "handoff": "false",
+            "updated_at": "={{ new Date().toISOString() }}"
+          },
+          "matchingColumns": ["userId"],
+          "schema": [
+            { "id": "userId", "displayName": "userId", "required": false, "defaultMatch": false, "display": true, "type": "string", "canBeUsedToMatch": true, "removed": false },
+            { "id": "handoff", "displayName": "handoff", "required": false, "defaultMatch": false, "display": true, "type": "string", "canBeUsedToMatch": false, "removed": false },
+            { "id": "updated_at", "displayName": "updated_at", "required": false, "defaultMatch": false, "display": true, "type": "string", "canBeUsedToMatch": false, "removed": false }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "aa000008-0000-0000-0000-000000000008",
+      "name": "Reset Handoff",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [2100, 560],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "7dF46kP0xyyFUOM8",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.line.me/v2/bot/message/reply",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Authorization", "value": "Bearer +0K7M1zwnlB9m8b/Ic3PriLFVZ1rl9ARfq16mWULBVwnL6RizEr/ifgQDpRdOstBZbF4bkshspdGcV07NGThq4C1ZJSbSPwx4KnyqEpX4rw5Q6pXqc/Ru+HvVN0gF5dzXtKOYv0RjU7c05SDsy1kCAdB04t89/1O/w1cDnyilFU=" },
+            { "name": "Content-Type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ replyToken: $('Check Handoff Mode').first().json.replyToken, messages: [{ type: \"text\", text: \"รับทราบค่ะ บอทคุกกี้กลับมาช่วยแล้วนะคะ มีอะไรให้ช่วยอีกไหมคะ\" }] }) }}",
+        "options": {}
+      },
+      "id": "aa000009-0000-0000-0000-000000000009",
+      "name": "Reply Handoff End",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [2300, 560]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.line.me/v2/bot/message/reply",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Authorization", "value": "Bearer +0K7M1zwnlB9m8b/Ic3PriLFVZ1rl9ARfq16mWULBVwnL6RizEr/ifgQDpRdOstBZbF4bkshspdGcV07NGThq4C1ZJSbSPwx4KnyqEpX4rw5Q6pXqc/Ru+HvVN0gF5dzXtKOYv0RjU7c05SDsy1kCAdB04t89/1O/w1cDnyilFU=" },
+            { "name": "Content-Type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ replyToken: $json.replyToken, messages: [{ type: \"text\", text: \"หมอกำลังดูแลอยู่ค่ะ รอสักครู่นะคะ\", quickReply: { items: [{ type: \"action\", action: { type: \"message\", label: \"จบแล้วค่ะ\", text: \"จบแล้วค่ะ\" } }] } }] }) }}",
+        "options": {}
+      },
+      "id": "aa000010-0000-0000-0000-000000000010",
+      "name": "Reply Handoff Active",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [2100, 720]
     }
   ],
   "connections": {
     "Parse LINE Message": {
-      "main": [
-        [
-          {
-            "node": "If",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
+      "main": [[{ "node": "If", "type": "main", "index": 0 }]]
     },
     "Read State": {
+      "main": [[{ "node": "Check Handoff Mode", "type": "main", "index": 0 }]]
+    },
+    "Check Handoff Mode": {
+      "main": [[{ "node": "If Normal Mode", "type": "main", "index": 0 }]]
+    },
+    "If Normal Mode": {
       "main": [
-        [
-          {
-            "node": "Build Gemini Request",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        [{ "node": "Build Gemini Request", "type": "main", "index": 0 }],
+        [{ "node": "If Is Trigger", "type": "main", "index": 0 }]
       ]
+    },
+    "If Is Trigger": {
+      "main": [
+        [{ "node": "Set Handoff True", "type": "main", "index": 0 }],
+        [{ "node": "If Is Reset", "type": "main", "index": 0 }]
+      ]
+    },
+    "Set Handoff True": {
+      "main": [[{ "node": "Push Notify Admin", "type": "main", "index": 0 }]]
+    },
+    "Push Notify Admin": {
+      "main": [[{ "node": "Reply Handoff Start", "type": "main", "index": 0 }]]
+    },
+    "If Is Reset": {
+      "main": [
+        [{ "node": "Reset Handoff", "type": "main", "index": 0 }],
+        [{ "node": "Reply Handoff Active", "type": "main", "index": 0 }]
+      ]
+    },
+    "Reset Handoff": {
+      "main": [[{ "node": "Reply Handoff End", "type": "main", "index": 0 }]]
     },
     "Save State": {
-      "main": [
-        [
-          {
-            "node": "Reply to LINE",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
+      "main": [[{ "node": "Reply to LINE", "type": "main", "index": 0 }]]
     },
     "Webhook1": {
-      "main": [
-        [
-          {
-            "node": "Verify LINE Signature",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
+      "main": [[{ "node": "Verify LINE Signature", "type": "main", "index": 0 }]]
     },
     "If": {
       "main": [
         [
-          {
-            "node": "Read State",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "Log FAQ Question",
-            "type": "main",
-            "index": 0
-          }
+          { "node": "Read State", "type": "main", "index": 0 },
+          { "node": "Log FAQ Question", "type": "main", "index": 0 }
         ]
       ]
     },
     "If1": {
       "main": [
-        [
-          {
-            "node": "Save State",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Append row in sheet",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        [{ "node": "Save State", "type": "main", "index": 0 }],
+        [{ "node": "Append row in sheet", "type": "main", "index": 0 }]
       ]
     },
     "Append row in sheet": {
-      "main": [
-        [
-          {
-            "node": "Delete rows or columns from sheet",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
+      "main": [[{ "node": "Delete rows or columns from sheet", "type": "main", "index": 0 }]]
     },
     "Delete rows or columns from sheet": {
-      "main": [
-        [
-          {
-            "node": "Reply to LINE",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
+      "main": [[{ "node": "Reply to LINE", "type": "main", "index": 0 }]]
     },
     "Build Gemini Request": {
-      "main": [
-        [
-          {
-            "node": "Gemini API",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
+      "main": [[{ "node": "Gemini API", "type": "main", "index": 0 }]]
     },
     "Gemini API": {
-      "main": [
-        [
-          {
-            "node": "Parse Gemini Response",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
+      "main": [[{ "node": "Parse Gemini Response", "type": "main", "index": 0 }]]
     },
     "Parse Gemini Response": {
-      "main": [
-        [
-          {
-            "node": "If1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
+      "main": [[{ "node": "If1", "type": "main", "index": 0 }]]
     },
     "Verify LINE Signature": {
-      "main": [
-        [
-          {
-            "node": "Parse LINE Message",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
+      "main": [[{ "node": "Parse LINE Message", "type": "main", "index": 0 }]]
     }
   },
   "settings": {
