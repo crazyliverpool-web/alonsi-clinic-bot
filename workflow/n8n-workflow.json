@@ -477,7 +477,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{ JSON.stringify({ replyToken: $('Check Handoff Mode').first().json.replyToken, messages: [{ type: \"text\", text: \"รับทราบค่ะ กำลังแจ้งหมอให้นะคะ รอสักครู่ค่ะ\\n\\nเมื่อคุยกับหมอเสร็จแล้ว กดปุ่มด้านล่างเพื่อให้บอทกลับมาช่วยได้เลยนะคะ\", quickReply: { items: [{ type: \"action\", action: { type: \"message\", label: \"จบแล้วค่ะ\", text: \"จบแล้วค่ะ\" } }] } }] }) }}",
+        "jsonBody": "={{ JSON.stringify({ replyToken: $('Check Handoff Mode').first().json.replyToken, messages: [{ type: \"text\", text: \"รับทราบค่ะ กำลังแจ้งหมอให้นะคะ รอสักครู่ค่ะ\\n\\nเมื่อคุยกับหมอเสร็จแล้ว กดปุ่ม \\\"จบแล้วค่ะ\\\" ด้านล่างเพื่อให้บอทกลับมาช่วยได้เลยนะคะ\", quickReply: { items: [{ type: \"action\", action: { type: \"message\", label: \"✅ จบแล้วค่ะ\", text: \"จบแล้วค่ะ\" } }] } }] }) }}",
         "options": {}
       },
       "id": "aa000006-0000-0000-0000-000000000006",
@@ -586,7 +586,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{ JSON.stringify({ replyToken: $json.replyToken, messages: [{ type: \"text\", text: \"หมอกำลังดูแลอยู่ค่ะ รอสักครู่นะคะ\", quickReply: { items: [{ type: \"action\", action: { type: \"message\", label: \"จบแล้วค่ะ\", text: \"จบแล้วค่ะ\" } }] } }] }) }}",
+        "jsonBody": "={{ JSON.stringify({ replyToken: $json.replyToken, messages: [{ type: \"text\", text: \"หมอกำลังดูแลอยู่ค่ะ รอสักครู่นะคะ\\n\\nเมื่อคุยกับหมอเสร็จแล้ว กดปุ่ม \\\"จบแล้วค่ะ\\\" ด้านล่างได้เลยนะคะ\", quickReply: { items: [{ type: \"action\", action: { type: \"message\", label: \"✅ จบแล้วค่ะ\", text: \"จบแล้วค่ะ\" } }] } }] }) }}",
         "options": {}
       },
       "id": "aa000010-0000-0000-0000-000000000010",
