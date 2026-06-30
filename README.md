@@ -13,15 +13,16 @@ LINE Official Account (Messaging API)
   ↓ webhook POST
 n8n Cloud (csmileyala.app.n8n.cloud)
   Workflow: "Alonsi Clinic LINE Bot"
-  ├── Webhook1              → รับ event จาก LINE
-  ├── Parse LINE Message    → แยก userId / replyToken / message
-  ├── If                    → กรอง non-message events ออก
-  ├── Read State            → Google Sheets: ดึง history ของ userId
-  ├── Build Gemini Request  → สร้าง request payload สำหรับ Gemini
-  ├── Gemini API            → เรียก gemini-2.5-flash
-  ├── Parse Gemini Response → แยก replyText / booking_complete / appointment
-  ├── If1                   → เช็ค booking_complete
-  │   ├── false → Save History → Reply to LINE
+  ├── Webhook1                        → รับ event จาก LINE (rawBody enabled)
+  ├── Verify LINE Signature           → ตรวจ X-Line-Signature (HMAC-SHA256)
+  ├── Parse LINE Message              → แยก userId / replyToken / message
+  ├── If                              → กรอง non-message events ออก
+  ├── Read State                      → Google Sheets: ดึง history ของ userId
+  ├── Build Gemini Request            → สร้าง request payload สำหรับ Gemini
+  ├── Gemini API                      → เรียก gemini-2.5-flash
+  ├── Parse Gemini Response           → แยก replyText / booking_complete / appointment
+  ├── If1                             → เช็ค booking_complete
+  │   ├── false → Save State (userId + history + updated_at) → Reply to LINE
   │   └── true  → Append row (Appointments) → Delete State row → Reply to LINE
 ```
 
@@ -104,8 +105,10 @@ n8n Cloud (csmileyala.app.n8n.cloud)
 - `booking_complete !== true` → **TRUE [0]** → Save History → Reply
 - `booking_complete === true` → **FALSE [1]** → Append Appointments → Delete State row → Reply
 
-### Save History
-เขียนลง State sheet: `userId` + `history` (JSON string, max 20 messages)
+### Save State
+เขียนลง State sheet: `userId` + `history` (JSON string, max 20 messages) + `updated_at` (ISO timestamp)
+
+**Auto-cleanup:** cron ทุกคืนเที่ยงคืน (เวลาไทย) ลบ row ที่ `updated_at` เก่ากว่า 24 ชั่วโมง
 
 ### Conversation History (Gemini format)
 ```js
@@ -175,3 +178,5 @@ curl -X PUT -H "X-N8N-API-KEY: <key>" -H "Content-Type: application/json" \
 | 2026-06-25 | พบและแก้ bug If1 true→Append connection |
 | 2026-06-30 | เพิ่ม Gemini AI (gemini-2.5-flash) แทน State Machine |
 | 2026-06-30 | เปลี่ยนชื่อบอทเป็น "คุกกี้" |
+| 2026-06-30 | เพิ่ม LINE Signature Verification (HMAC-SHA256) |
+| 2026-06-30 | Auto-cleanup: Save State เขียน updated_at + cron ล้าง session ค้าง 24 ชม. |
