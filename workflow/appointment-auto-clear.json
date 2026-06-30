@@ -1,0 +1,188 @@
+{
+  "name": "Appointment Auto-Clear",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [{"field": "hours", "hoursInterval": 1}]
+        }
+      },
+      "id": "ac-001-schedule",
+      "name": "Every Hour",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1PkKrnezY7HEUKAj1njIl-USsdly4tiKtzgYy0tv8psk",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Appointments",
+          "mode": "name"
+        },
+        "options": {}
+      },
+      "id": "ac-002-read",
+      "name": "Read Appointments",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [460, 300],
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "7dF46kP0xyyFUOM8",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const rows = $input.all();\nconst now = new Date();\nconst results = [];\n\nfor (const row of rows) {\n  const data = row.json;\n  if (data.status !== 'done') continue;\n\n  if (!data.handled_at || data.handled_at === '') {\n    results.push({ action: 'mark', timestamp: data.timestamp, row_number: data.row_number });\n  } else {\n    const markedAt = new Date(data.handled_at);\n    if (!isNaN(markedAt.getTime())) {\n      const hoursDiff = (now - markedAt) / (1000 * 60 * 60);\n      if (hoursDiff >= 12) {\n        results.push({ action: 'delete', row_number: data.row_number });\n      }\n    }\n  }\n}\n\nif (results.length === 0) return [{ json: { action: 'none' } }];\nreturn results.map(r => ({ json: r }));"
+      },
+      "id": "ac-003-process",
+      "name": "Process Rows",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [680, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {"caseSensitive": true, "leftValue": "", "typeValidation": "loose", "version": 3},
+          "conditions": [{
+            "id": "ac-if1-cond",
+            "leftValue": "={{ $json.action }}",
+            "rightValue": "none",
+            "operator": {"type": "string", "operation": "notEquals"}
+          }],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "ac-004-if-has-action",
+      "name": "If Has Action",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [900, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {"caseSensitive": true, "leftValue": "", "typeValidation": "loose", "version": 3},
+          "conditions": [{
+            "id": "ac-if2-cond",
+            "leftValue": "={{ $json.action }}",
+            "rightValue": "mark",
+            "operator": {"type": "string", "operation": "equals"}
+          }],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "ac-005-if-is-mark",
+      "name": "If Is Mark",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [1120, 300]
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1PkKrnezY7HEUKAj1njIl-USsdly4tiKtzgYy0tv8psk",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Appointments",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "timestamp": "={{ $json.timestamp }}",
+            "handled_at": "={{ new Date().toISOString() }}"
+          },
+          "matchingColumns": ["timestamp"],
+          "schema": [
+            {"id": "timestamp", "displayName": "timestamp", "required": false, "defaultMatch": false, "display": true, "type": "string", "canBeUsedToMatch": true, "removed": false},
+            {"id": "handled_at", "displayName": "handled_at", "required": false, "defaultMatch": false, "display": true, "type": "string", "canBeUsedToMatch": false, "removed": false}
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "ac-006-mark",
+      "name": "Mark handled_at",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [1340, 200],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "7dF46kP0xyyFUOM8",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "documentId": {
+          "__rl": true,
+          "value": "1PkKrnezY7HEUKAj1njIl-USsdly4tiKtzgYy0tv8psk",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Appointments",
+          "mode": "name"
+        },
+        "startIndex": "={{ $json.row_number }}"
+      },
+      "id": "ac-007-delete",
+      "name": "Delete Appointment",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [1340, 400],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "7dF46kP0xyyFUOM8",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Every Hour": {
+      "main": [[{"node": "Read Appointments", "type": "main", "index": 0}]]
+    },
+    "Read Appointments": {
+      "main": [[{"node": "Process Rows", "type": "main", "index": 0}]]
+    },
+    "Process Rows": {
+      "main": [[{"node": "If Has Action", "type": "main", "index": 0}]]
+    },
+    "If Has Action": {
+      "main": [
+        [{"node": "If Is Mark", "type": "main", "index": 0}]
+      ]
+    },
+    "If Is Mark": {
+      "main": [
+        [{"node": "Mark handled_at", "type": "main", "index": 0}],
+        [{"node": "Delete Appointment", "type": "main", "index": 0}]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null
+}
