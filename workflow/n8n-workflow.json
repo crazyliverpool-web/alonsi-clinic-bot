@@ -438,7 +438,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=YOUR_GEMINI_API_KEY",
+        "url": "={{ 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=' + $vars.GEMINI_API_KEY }}",
         "sendBody": true,
         "specifyBody": "json",
         "jsonBody": "={{ JSON.stringify($json.geminiRequest) }}",
@@ -1271,8 +1271,8 @@
       }
     ]
   },
-  "activeVersionId": "5a4a5a61-ecff-4f54-8840-967764c9ac05",
-  "versionCounter": 127,
+  "activeVersionId": "67b58f7c-898e-4f0e-9dd9-73bc9bdeadd6",
+  "versionCounter": 128,
   "triggerCount": 1,
   "sourceWorkflowId": null,
   "shared": [
@@ -1296,9 +1296,9 @@
     }
   ],
   "activeVersion": {
-    "updatedAt": "2026-07-01T02:10:36.383Z",
-    "createdAt": "2026-07-01T02:10:36.383Z",
-    "versionId": "5a4a5a61-ecff-4f54-8840-967764c9ac05",
+    "updatedAt": "2026-07-01T02:23:42.936Z",
+    "createdAt": "2026-07-01T02:23:42.936Z",
+    "versionId": "67b58f7c-898e-4f0e-9dd9-73bc9bdeadd6",
     "workflowId": "GFdRhaxbgbxvIPjw",
     "nodes": [
       {
@@ -1735,7 +1735,7 @@
       {
         "parameters": {
           "method": "POST",
-          "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=YOUR_GEMINI_API_KEY",
+          "url": "={{ 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=' + $vars.GEMINI_API_KEY }}",
           "sendBody": true,
           "specifyBody": "json",
           "jsonBody": "={{ JSON.stringify($json.geminiRequest) }}",
@@ -2505,18 +2505,18 @@
     "autosaved": false,
     "workflowPublishHistory": [
       {
-        "createdAt": "2026-07-01T02:10:36.716Z",
-        "id": 99,
+        "createdAt": "2026-07-01T02:23:43.197Z",
+        "id": 101,
         "workflowId": "GFdRhaxbgbxvIPjw",
-        "versionId": "5a4a5a61-ecff-4f54-8840-967764c9ac05",
+        "versionId": "67b58f7c-898e-4f0e-9dd9-73bc9bdeadd6",
         "event": "activated",
         "userId": "334fdcc3-1f45-4204-ad1c-a51fcd5633db"
       },
       {
-        "createdAt": "2026-07-01T02:10:36.619Z",
-        "id": 98,
+        "createdAt": "2026-07-01T02:23:43.128Z",
+        "id": 100,
         "workflowId": "GFdRhaxbgbxvIPjw",
-        "versionId": "5a4a5a61-ecff-4f54-8840-967764c9ac05",
+        "versionId": "67b58f7c-898e-4f0e-9dd9-73bc9bdeadd6",
         "event": "deactivated",
         "userId": "334fdcc3-1f45-4204-ad1c-a51fcd5633db"
       }
