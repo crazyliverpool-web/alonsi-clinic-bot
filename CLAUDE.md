@@ -81,16 +81,15 @@ CLAUDE.md             ← ไฟล์นี้
 | C1 | LINE token → n8n Header Auth credential | ✅ |
 | C2 | HMAC verify enforced, ใช้ $vars.LINE_CHANNEL_SECRET | ✅ |
 | C3 | Gemini fail → fallback reply + เบอร์คลินิก | ✅ |
+| C4 | Delete State match ด้วย userId (node "Clear State by userId") แทน row_number | ✅ |
 | M1 | If node leftValue `={{ $json.userId }}` (เพิ่ม =) | ✅ |
 | M2 | If Is Reset false branch → disconnect (silent handoff) | ✅ |
+| M3 | Webhook idempotency — dedup by `event.message.id` ใน "Parse LINE Message" (workflow static data, cap 500) | ✅ (2026-07-01) |
+| M4 | Validate required appointment fields (name/phone/procedure/preferred_time) ใน "Parse Gemini Response" ก่อนปล่อยให้ Append | ✅ (2026-07-01) |
 
 ## Pending
 
-| Fix | รายละเอียด |
-|-----|-----------|
-| C4 | Delete State ควร match ด้วย userId ไม่ใช่ row_number (race condition) |
-| M3 | Webhook idempotency — deduplicate by event.message.id |
-| M4 | Validate appointment fields ก่อน Append |
+(ไม่มี — ดู `for-sonnet/tasks.md` T14 สำหรับงานถัดไป เช่น cost audit เต็มรูปแบบ)
 
 ## วิธีอัปเดต Workflow
 
