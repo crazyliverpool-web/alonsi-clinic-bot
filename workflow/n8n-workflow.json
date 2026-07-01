@@ -106,7 +106,7 @@
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
-            { "name": "Authorization", "value": "Bearer +0K7M1zwnlB9m8b/Ic3PriLFVZ1rl9ARfq16mWULBVwnL6RizEr/ifgQDpRdOstBZbF4bkshspdGcV07NGThq4C1ZJSbSPwx4KnyqEpX4rw5Q6pXqc/Ru+HvVN0gF5dzXtKOYv0RjU7c05SDsy1kCAdB04t89/1O/w1cDnyilFU=" },
+            { "name": "Authorization", "value": "CREDENTIAL_REQUIRED" },
             { "name": "Content-Type", "value": "application/json" }
           ]
         },
@@ -141,7 +141,7 @@
           "conditions": [
             {
               "id": "dbd97943-2f39-412a-b208-6b6528a3c731",
-              "leftValue": "{{ $json.userId }}",
+              "leftValue": "={{ $json.userId }}",
               "rightValue": "false (Boolean)",
               "operator": { "type": "string", "operation": "notEmpty", "singleValue": true }
             }
@@ -292,7 +292,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const crypto = require('crypto');\nconst channelSecret = 'YOUR_LINE_CHANNEL_SECRET';\n\ntry {\n  const rawBody = $input.item.json.rawBody || JSON.stringify($input.item.json.body || $input.item.json);\n  const headers = $input.item.json.headers || {};\n  const signature = headers['x-line-signature'] || '';\n\n  if (signature) {\n    const hash = crypto.createHmac('sha256', channelSecret)\n      .update(rawBody, 'utf8')\n      .digest('base64');\n    if (hash !== signature) {\n      console.log('Signature mismatch — possible fake request or rawBody format issue');\n    }\n  }\n} catch(e) {\n  console.log('Signature check error:', e.message);\n}\n\nreturn $input.item;"
+        "jsCode": "const crypto = require('crypto');\n\n// Set LINE_CHANNEL_SECRET in n8n Settings -> Variables\nconst channelSecret = $env.LINE_CHANNEL_SECRET || '';\n\nif (!channelSecret) {\n  console.log('WARNING: LINE_CHANNEL_SECRET not set - signature check disabled.');\n  return $input.item;\n}\n\nconst rawBody = $input.item.json.rawBody || JSON.stringify($input.item.json.body || $input.item.json);\nconst headers = $input.item.json.headers || {};\nconst signature = headers['x-line-signature'] || '';\n\nif (!signature) {\n  throw new Error('Missing x-line-signature - rejecting unsigned request');\n}\n\nconst hash = crypto.createHmac('sha256', channelSecret)\n  .update(rawBody, 'utf8')\n  .digest('base64');\n\nif (hash !== signature) {\n  throw new Error('Invalid LINE signature - potential forged request');\n}\n\nreturn $input.item;"
       },
       "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
       "name": "Verify LINE Signature",
@@ -449,7 +449,7 @@
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
-            { "name": "Authorization", "value": "Bearer +0K7M1zwnlB9m8b/Ic3PriLFVZ1rl9ARfq16mWULBVwnL6RizEr/ifgQDpRdOstBZbF4bkshspdGcV07NGThq4C1ZJSbSPwx4KnyqEpX4rw5Q6pXqc/Ru+HvVN0gF5dzXtKOYv0RjU7c05SDsy1kCAdB04t89/1O/w1cDnyilFU=" },
+            { "name": "Authorization", "value": "CREDENTIAL_REQUIRED" },
             { "name": "Content-Type", "value": "application/json" }
           ]
         },
@@ -471,7 +471,7 @@
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
-            { "name": "Authorization", "value": "Bearer +0K7M1zwnlB9m8b/Ic3PriLFVZ1rl9ARfq16mWULBVwnL6RizEr/ifgQDpRdOstBZbF4bkshspdGcV07NGThq4C1ZJSbSPwx4KnyqEpX4rw5Q6pXqc/Ru+HvVN0gF5dzXtKOYv0RjU7c05SDsy1kCAdB04t89/1O/w1cDnyilFU=" },
+            { "name": "Authorization", "value": "CREDENTIAL_REQUIRED" },
             { "name": "Content-Type", "value": "application/json" }
           ]
         },
@@ -558,7 +558,7 @@
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
-            { "name": "Authorization", "value": "Bearer +0K7M1zwnlB9m8b/Ic3PriLFVZ1rl9ARfq16mWULBVwnL6RizEr/ifgQDpRdOstBZbF4bkshspdGcV07NGThq4C1ZJSbSPwx4KnyqEpX4rw5Q6pXqc/Ru+HvVN0gF5dzXtKOYv0RjU7c05SDsy1kCAdB04t89/1O/w1cDnyilFU=" },
+            { "name": "Authorization", "value": "CREDENTIAL_REQUIRED" },
             { "name": "Content-Type", "value": "application/json" }
           ]
         },
@@ -580,7 +580,7 @@
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
-            { "name": "Authorization", "value": "Bearer +0K7M1zwnlB9m8b/Ic3PriLFVZ1rl9ARfq16mWULBVwnL6RizEr/ifgQDpRdOstBZbF4bkshspdGcV07NGThq4C1ZJSbSPwx4KnyqEpX4rw5Q6pXqc/Ru+HvVN0gF5dzXtKOYv0RjU7c05SDsy1kCAdB04t89/1O/w1cDnyilFU=" },
+            { "name": "Authorization", "value": "CREDENTIAL_REQUIRED" },
             { "name": "Content-Type", "value": "application/json" }
           ]
         },
